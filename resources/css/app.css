@@ -1,0 +1,163 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source "../**/*.blade.php";
+@source "../**/*.js";
+@source "../**/*.vue";
+
+@theme {
+    --font-sans: 'Segoe UI', 'Inter', sans-serif;
+    --font-display: 'Quenda', 'Georgia', serif;
+    --color-brand-bg: #1f1918;
+    --color-brand-red: #c62828;
+    --color-brand-green: #1f7a4a;
+    --color-brand-yellow: #f4c95d;
+    --color-brand-wood: #7a4b2b;
+    --color-brand-beige: #f6e7c8;
+    --color-brand-paper: #fffaf2;
+    --color-brand-ink: #241919;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans), sans-serif;
+    color: var(--page-text-color, var(--color-brand-ink));
+    background: var(--page-background,
+            radial-gradient(circle at top left, rgba(31, 122, 74, 0.16), transparent 24%),
+            radial-gradient(circle at top right, rgba(198, 40, 40, 0.14), transparent 22%),
+            linear-gradient(135deg, #fffaf3 0%, #f4eadc 48%, #efe4d4 100%));
+    min-height: 100vh;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: var(--page-overlay,
+            linear-gradient(90deg,
+                rgba(31, 122, 74, 0.05) 0,
+                rgba(31, 122, 74, 0.05) 16%,
+                transparent 16%,
+                transparent 84%,
+                rgba(198, 40, 40, 0.05) 84%,
+                rgba(198, 40, 40, 0.05) 100%));
+    opacity: 0.9;
+}
+
+.container-shell {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.surface-card {
+    @apply rounded-[1.75rem] border border-white/70 bg-white/80 shadow-[0_20px_60px_rgba(24, 19, 17, 0.12)] backdrop-blur-xl;
+}
+
+.section-title {
+    font-family: var(--font-display), serif;
+    @apply text-2xl font-normal tracking-tight text-brand-bg md:text-3xl;
+}
+
+.wood-strip-title {
+    font-family: var(--font-display), serif;
+    @apply inline-flex w-full items-center rounded-[1.25rem] border border-brand-wood/15 px-4 py-2.5 text-xl font-normal tracking-tight text-brand-bg md:px-5 md:py-3 md:text-2xl;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(248, 240, 228, 0.92));
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.wood-strip-subtitle {
+    font-family: var(--font-display), serif;
+    @apply inline-flex items-center rounded-full border border-brand-wood/15 px-3 py-1.5 text-sm font-medium tracking-wide text-brand-bg md:text-base;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(244, 239, 230, 0.92));
+}
+
+.menu-title {
+    font-family: var(--font-display), sans-serif;
+    letter-spacing: -0.03em;
+}
+
+.menu-subtitle {
+    font-family: var(--font-display), sans-serif;
+    letter-spacing: 0.08em;
+}
+
+.menu-description {
+    font-family: var(--font-sans), sans-serif;
+}
+
+.menu-value {
+    font-family: var(--font-sans), sans-serif;
+    letter-spacing: -0.01em;
+}
+
+.menu-badge {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-green/15 bg-brand-green/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-green;
+}
+
+.menu-stat {
+    @apply rounded-3xl border border-white/70 bg-white/85 p-4 shadow-[0_12px_28px_rgba(24, 19, 17, 0.08)];
+}
+
+.menu-stat-icon {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-brand-green/10 text-brand-green;
+}
+
+.menu-section-card {
+    @apply overflow-hidden rounded-[1.75rem] border border-white/70 bg-white/82 shadow-[0_20px_50px_rgba(24, 19, 17, 0.08)] backdrop-blur-xl;
+}
+
+.menu-panel {
+    background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(255, 251, 245, 0.88)),
+        linear-gradient(135deg, rgba(31, 122, 74, 0.08), rgba(198, 40, 40, 0.08));
+}
+
+.menu-chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-wood/15 bg-white/85 px-4 py-2 text-sm font-semibold text-brand-ink transition hover:-translate-y-0.5 hover:border-brand-green/30 hover:bg-brand-green/10 hover:text-brand-green;
+}
+
+.menu-chip-active {
+    @apply border-brand-green/30 bg-brand-green text-white shadow-lg shadow-brand-green/15 hover:bg-brand-green;
+}
+
+.pill-chip {
+    @apply inline-flex items-center gap-2 rounded-full border border-brand-wood/15 bg-white/85 px-4 py-2 text-sm font-semibold tracking-wide text-brand-ink transition hover:-translate-y-0.5 hover:border-brand-green/25 hover:bg-white;
+}
+
+.btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-linear-to-r from-brand-green via-emerald-600 to-brand-red px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-brand-green/20 transition hover:-translate-y-0.5 hover:shadow-xl;
+}
+
+.btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-brand-green/20 bg-white px-6 py-3 text-sm font-semibold text-brand-green shadow-lg shadow-brand-green/10 transition hover:-translate-y-0.5 hover:border-brand-green hover:bg-brand-green hover:text-white;
+}
+
+.menu-floating-button {
+    @apply inline-flex items-center gap-3 rounded-full border border-brand-green/20 bg-brand-green px-4 py-3 text-sm font-semibold text-white shadow-2xl shadow-brand-green/25 transition hover:-translate-y-1 hover:bg-emerald-700;
+}
+
+.menu-footer {
+    background:
+        linear-gradient(135deg, rgba(31, 122, 74, 0.98), rgba(27, 58, 40, 0.98)),
+        linear-gradient(90deg, rgba(198, 40, 40, 0.16), transparent 50%, rgba(244, 201, 93, 0.16));
+}
+
+.animate-rise {
+    animation: riseIn 0.55s ease both;
+}
+
+@keyframes riseIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
