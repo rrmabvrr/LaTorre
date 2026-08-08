@@ -383,7 +383,6 @@ a {
 .hero-scroll-indicator {
     position: absolute;
     bottom: 30px;
-    left: 50%;
     transform: translateX(-50%);
     text-align: center;
     z-index: 2;
@@ -1032,6 +1031,511 @@ a {
 ::selection {
     background: var(--gold-light);
     color: var(--brown);
+}
+
+/* ============================================
+   COMANDA TOGGLE BUTTON
+   ============================================ */
+.comanda-toggle {
+    position: fixed;
+    bottom: 100px;
+    right: 28px;
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, var(--red), var(--red-dark));
+    color: var(--white);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 6px 24px rgba(196, 40, 45, 0.4);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.comanda-toggle svg {
+    width: 28px;
+    height: 28px;
+}
+
+.comanda-toggle:hover {
+    transform: scale(1.12);
+    box-shadow: 0 8px 32px rgba(196, 40, 45, 0.5);
+}
+
+.comanda-toggle.has-items {
+    animation: comanda-glow 2s infinite;
+}
+
+.comanda-toggle.pulse {
+    animation: comanda-pulse-once 0.6s ease-out;
+}
+
+@keyframes comanda-glow {
+    0%, 100% { box-shadow: 0 6px 24px rgba(196, 40, 45, 0.4); }
+    50% { box-shadow: 0 6px 32px rgba(196, 40, 45, 0.6), 0 0 0 10px rgba(196, 40, 45, 0.1); }
+}
+
+@keyframes comanda-pulse-once {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+/* Badge */
+.comanda-badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    width: 24px;
+    height: 24px;
+    background: var(--gold);
+    color: var(--brown);
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--white);
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.comanda-badge.has-items {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ============================================
+   COMANDA OVERLAY
+   ============================================ */
+.comanda-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 21, 16, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 1050;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.comanda-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* ============================================
+   COMANDA PANEL
+   ============================================ */
+.comanda-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 420px;
+    height: 100%;
+    background: var(--off-white);
+    z-index: 1100;
+    display: flex;
+    flex-direction: column;
+    transform: translateX(100%);
+    transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: -8px 0 40px rgba(0, 0, 0, 0.15);
+}
+
+.comanda-panel.open {
+    transform: translateX(0);
+}
+
+/* Panel Header */
+.comanda-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, var(--brown), var(--brown-light));
+    color: var(--cream-light);
+    flex-shrink: 0;
+}
+
+.comanda-header-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.comanda-header-info svg {
+    color: var(--gold-light);
+}
+
+.comanda-header h2 {
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-weight: 700;
+}
+
+.comanda-close {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    color: var(--cream-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-normal);
+}
+
+.comanda-close svg {
+    width: 18px;
+    height: 18px;
+}
+
+.comanda-close:hover {
+    background: rgba(196, 40, 45, 0.6);
+    border-color: rgba(196, 40, 45, 0.8);
+    transform: rotate(90deg);
+}
+
+/* Panel Body */
+.comanda-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px 24px;
+}
+
+/* Empty State */
+.comanda-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    text-align: center;
+    gap: 12px;
+}
+
+.comanda-empty-icon {
+    font-size: 3.5rem;
+    opacity: 0.5;
+    animation: bounce-gentle 3s ease-in-out infinite;
+}
+
+.comanda-empty p {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--brown);
+}
+
+.comanda-empty span {
+    font-size: 0.9rem;
+    color: var(--gray-600);
+}
+
+/* Items List */
+.comanda-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.comanda-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+    animation: comanda-item-in 0.35s ease-out both;
+}
+
+.comanda-item:hover {
+    border-color: var(--green-light);
+    box-shadow: var(--shadow-sm);
+}
+
+.comanda-item.removing {
+    opacity: 0;
+    transform: translateX(60px) scale(0.9);
+    max-height: 0;
+    padding: 0 16px;
+    margin-bottom: 0;
+    border-width: 0;
+    overflow: hidden;
+}
+
+@keyframes comanda-item-in {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.comanda-item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+.comanda-item-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--brown);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.comanda-item-price {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--green-dark);
+}
+
+/* Quantity Controls */
+.comanda-item-controls {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+}
+
+.comanda-qty-btn {
+    width: 30px;
+    height: 30px;
+    border: 1px solid var(--gray-200);
+    border-radius: 50%;
+    background: var(--white);
+    color: var(--brown);
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    line-height: 1;
+}
+
+.comanda-qty-btn:hover {
+    background: var(--green);
+    color: var(--white);
+    border-color: var(--green);
+    transform: scale(1.1);
+}
+
+.comanda-qty-btn.minus:hover {
+    background: var(--red);
+    border-color: var(--red);
+}
+
+.comanda-item-qty {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--brown);
+}
+
+.comanda-remove-btn {
+    width: 30px;
+    height: 30px;
+    background: none;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    color: var(--gray-300);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+    margin-left: 4px;
+}
+
+.comanda-remove-btn:hover {
+    background: rgba(196, 40, 45, 0.1);
+    color: var(--red);
+    border-color: rgba(196, 40, 45, 0.2);
+}
+
+/* Panel Footer */
+.comanda-footer {
+    flex-shrink: 0;
+    padding: 16px 24px 24px;
+    background: var(--white);
+    border-top: 1px solid var(--gray-200);
+    display: none;
+}
+
+.comanda-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.comanda-total span {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-600);
+}
+
+.comanda-total strong {
+    font-family: var(--font-display);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--green-dark);
+}
+
+.comanda-obs {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: var(--brown);
+    background: var(--gray-100);
+    resize: none;
+    outline: none;
+    margin-bottom: 14px;
+    transition: border-color var(--transition-fast);
+}
+
+.comanda-obs::placeholder {
+    color: var(--gray-300);
+}
+
+.comanda-obs:focus {
+    border-color: var(--green-light);
+    background: var(--white);
+}
+
+.comanda-send {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #25D366, #128C7E);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
+    margin-bottom: 10px;
+}
+
+.comanda-send:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(37, 211, 102, 0.4);
+}
+
+.comanda-send:active {
+    transform: translateY(0);
+}
+
+.comanda-clear {
+    width: 100%;
+    padding: 10px 20px;
+    background: none;
+    color: var(--gray-600);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.comanda-clear:hover {
+    color: var(--red);
+    border-color: var(--red);
+    background: rgba(196, 40, 45, 0.05);
+}
+
+/* ============================================
+   COMANDA ADD BUTTON FEEDBACK
+   ============================================ */
+.card-order.added {
+    background: linear-gradient(135deg, var(--gold), var(--gold-dark)) !important;
+    color: var(--brown) !important;
+    pointer-events: none;
+}
+
+.comanda-fly-badge {
+    position: fixed;
+    width: 28px;
+    height: 28px;
+    background: var(--red);
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    pointer-events: none;
+    transform: scale(1);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(196, 40, 45, 0.4);
+}
+
+/* ============================================
+   COMANDA RESPONSIVE
+   ============================================ */
+@media (max-width: 768px) {
+    .comanda-toggle {
+        bottom: 84px;
+        right: 20px;
+        width: 52px;
+        height: 52px;
+    }
+
+    .comanda-toggle svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .comanda-panel {
+        max-width: 100%;
+    }
+
+    .comanda-header {
+        padding: 16px 18px;
+    }
+
+    .comanda-body {
+        padding: 12px 18px;
+    }
+
+    .comanda-footer {
+        padding: 14px 18px 20px;
+    }
 }
 
 /* ============================================

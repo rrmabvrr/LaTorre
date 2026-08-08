@@ -14,8 +14,7 @@
 </head>
 
 <body>
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/5599142-8625" target="_blank" class="whatsapp-float" id="whatsapp-float"
+    <!-- Floating What    <a href="https://wa.me/5595991428625" target="_blank" class="whatsapp-float" id="whatsapp-float"
         aria-label="Fale conosco pelo WhatsApp">
         <svg viewBox="0 0 32 32" fill="currentColor">
             <path
@@ -23,6 +22,63 @@
         </svg>
         <span class="whatsapp-tooltip">Peça pelo WhatsApp!</span>
     </a>
+
+    <!-- Comanda Toggle Button -->
+    <button class="comanda-toggle" id="comanda-toggle" aria-label="Abrir comanda" type="button">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"></path>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <path d="M16 10a4 4 0 01-8 0"></path>
+        </svg>
+        <span class="comanda-badge" id="comanda-badge">0</span>
+    </button>
+
+    <!-- Comanda Panel -->
+    <div class="comanda-overlay" id="comanda-overlay"></div>
+    <aside class="comanda-panel" id="comanda-panel">
+        <div class="comanda-header">
+            <div class="comanda-header-info">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                </svg>
+                <h2>Sua Comanda</h2>
+            </div>
+            <button class="comanda-close" id="comanda-close" aria-label="Fechar comanda" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+
+        <div class="comanda-body" id="comanda-body">
+            <div class="comanda-empty" id="comanda-empty">
+                <div class="comanda-empty-icon">🛒</div>
+                <p>Sua comanda está vazia</p>
+                <span>Adicione itens do cardápio</span>
+            </div>
+            <ul class="comanda-items" id="comanda-items"></ul>
+        </div>
+
+        <div class="comanda-footer" id="comanda-footer">
+            <div class="comanda-total">
+                <span>Total</span>
+                <strong id="comanda-total-value">R$ 0,00</strong>
+            </div>
+            <textarea class="comanda-obs" id="comanda-obs" placeholder="Observações (ex: sem cebola, borda recheada...)" rows="2"></textarea>
+            <button class="comanda-send" id="comanda-send" type="button">
+                <svg viewBox="0 0 32 32" fill="currentColor" width="20" height="20">
+                    <path d="M16.004 0C7.165 0 .003 7.161.003 16c0 2.822.736 5.575 2.137 8.004L.003 32l8.203-2.1A15.95 15.95 0 0016.004 32C24.843 32 32 24.839 32 16S24.843 0 16.004 0zm0 29.09a13.04 13.04 0 01-6.65-1.817l-.477-.284-4.94 1.296 1.32-4.822-.311-.495A13.03 13.03 0 012.913 16c0-7.218 5.873-13.09 13.09-13.09 3.496 0 6.782 1.362 9.253 3.833a13.01 13.01 0 013.834 9.257c0 7.218-5.873 13.09-13.086 13.09zm7.175-9.802c-.393-.197-2.326-1.148-2.687-1.279-.361-.131-.624-.197-.886.197-.263.393-1.018 1.279-1.248 1.541-.23.263-.46.296-.853.098-.393-.197-1.66-.612-3.162-1.95-1.169-1.041-1.958-2.327-2.188-2.72-.23-.394-.025-.607.173-.803.177-.177.393-.46.59-.69.197-.23.263-.394.394-.657.131-.263.066-.493-.033-.69-.098-.197-.886-2.137-1.214-2.924-.32-.768-.645-.663-.886-.676l-.755-.013c-.263 0-.69.098-1.051.493-.361.394-1.379 1.348-1.379 3.286 0 1.938 1.412 3.81 1.609 4.072.197.263 2.78 4.244 6.733 5.953.94.406 1.675.649 2.248.83.944.3 1.804.258 2.483.157.758-.113 2.326-.951 2.654-1.87.329-.918.329-1.705.23-1.87-.098-.164-.361-.263-.755-.46z" />
+                </svg>
+                Enviar Pedido pelo WhatsApp
+            </button>
+            <button class="comanda-clear" id="comanda-clear" type="button">Limpar Comanda</button>
+        </div>
+    </aside>
 
     <!-- Hero / Header -->
     <header class="hero" id="hero">
@@ -43,7 +99,7 @@
                     Av. São Joaquim, 1127 - Dr. Silvio Leite
                 </p>
                 <div class="hero-phones">
-                    <a href="https://wa.me/5599142-8625" class="phone-link">
+                    <a href="https://wa.me/5595991428625" class="phone-link">
                         <span class="whatsapp-icon-small">📱</span> 99142-8625
                     </a>
                     <a href="tel:991429922" class="phone-link">
@@ -51,13 +107,13 @@
                     </a>
                 </div>
             </div>
-            <nav class="menu-nav" id="menu-nav">
-                <a href="#tradicionais" class="nav-pill active" data-category="tradicionais">Tradicionais</a>
-                <a href="#especiais" class="nav-pill" data-category="especiais">Especiais</a>
-                <a href="#premium" class="nav-pill" data-category="premium">Premium</a>
-                <a href="#doces" class="nav-pill" data-category="doces">Doces</a>
-                <a href="#bebidas" class="nav-pill" data-category="bebidas">Bebidas</a>
-                <a href="#sorvetes" class="nav-pill" data-category="sorvetes">Sorvetes</a>
+            <nav class="menu-nav text-uppercase" id="menu-nav">
+                <a href="#tradicionais" class="nav-pill active" data-category="tradicionais">TRADICIONAIS</a>
+                <a href="#especiais" class="nav-pill" data-category="especiais">ESPECIAIS</a>
+                <a href="#premium" class="nav-pill" data-category="premium">PREMIUM</a>
+                <a href="#doces" class="nav-pill" data-category="doces">DOCES</a>
+                <a href="#bebidas" class="nav-pill" data-category="bebidas">BEBIDAS</a>
+                <a href="#sorvetes" class="nav-pill" data-category="sorvetes">SORVETES</a>
             </nav>
         </div>
         <div class="hero-scroll-indicator">
@@ -87,8 +143,7 @@
                     <p class="card-desc">Molho de tomate especial, mussarela derretida, orégano e azeitonas</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Mussarela"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Mussarela" data-price="35.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card" id="card-calabresa">
@@ -100,8 +155,7 @@
                     <p class="card-desc">Molho de tomate, calabresa fatiada, cebola, mussarela e orégano</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Calabresa"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Calabresa" data-price="38.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card" id="card-portuguesa">
@@ -112,8 +166,7 @@
                     <p class="card-desc">Molho de tomate, presunto, ovos, cebola, azeitona, ervilha e mussarela</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza Portuguesa"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Portuguesa" data-price="40.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card" id="card-margherita">
@@ -124,8 +177,7 @@
                     <p class="card-desc">Molho de tomate, mussarela de búfala, tomate fresco, manjericão e azeite</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza Margherita"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Margherita" data-price="38.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card" id="card-frango-catupiry">
@@ -137,8 +189,7 @@
                     <p class="card-desc">Molho de tomate, frango desfiado, catupiry cremoso, milho e mussarela</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Frango com Catupiry"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Frango c/ Catupiry" data-price="40.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card" id="card-quatro-queijos-trad">
@@ -149,8 +200,7 @@
                     <p class="card-desc">Molho de tomate, mussarela, provolone, parmesão e catupiry</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza Quatro Queijos"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Quatro Queijos" data-price="42.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card" id="card-napolitana">
@@ -161,8 +211,7 @@
                     <p class="card-desc">Molho de tomate, mussarela, tomate fatiado, parmesão e manjericão</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza Napolitana"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Napolitana" data-price="38.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card" id="card-bacon">
@@ -173,8 +222,7 @@
                     <p class="card-desc">Molho de tomate, bacon crocante, mussarela, cebola e orégano</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Bacon"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Bacon" data-price="40.00">Adicionar</button>
                     </div>
                 </article>
             </div>
@@ -199,8 +247,7 @@
                         mussarela</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Carne de Sol"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Carne de Sol" data-price="48.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card especial" id="card-camarao">
@@ -212,8 +259,7 @@
                     <p class="card-desc">Molho de tomate, camarões selecionados, catupiry, mussarela e cebolinha</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Camarão"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Camarão" data-price="55.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card especial" id="card-peperoni">
@@ -224,8 +270,7 @@
                     <p class="card-desc">Molho de tomate, pepperoni artesanal, mussarela especial e orégano</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Pepperoni"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Pepperoni" data-price="45.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card especial" id="card-la-torre">
@@ -238,8 +283,7 @@
                     </p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza La Torre Especial"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza La Torre Especial" data-price="52.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card especial" id="card-strogonoff">
@@ -250,8 +294,7 @@
                     <p class="card-desc">Molho de tomate, strogonoff de frango, batata palha, mussarela e catupiry</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Strogonoff"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Strogonoff" data-price="45.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card especial" id="card-lombo-canadense">
@@ -262,8 +305,7 @@
                     <p class="card-desc">Molho de tomate, lombo canadense, catupiry, mussarela e cebola caramelizada</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Lombo Canadense"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Lombo Canadense" data-price="48.00">Adicionar</button>
                     </div>
                 </article>
             </div>
@@ -287,8 +329,7 @@
                     <p class="card-desc">Molho especial, filé mignon em tiras, champignon, catupiry e mussarela</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Filé Mignon"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Filé Mignon" data-price="58.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card premium" id="card-salmao">
@@ -300,8 +341,7 @@
                     <p class="card-desc">Cream cheese, salmão defumado, alcaparras, cebola roxa e cebolinha</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Salmão"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Salmão" data-price="62.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card premium" id="card-costela">
@@ -313,8 +353,7 @@
                     <p class="card-desc">Molho barbecue, costela desfiada, cebola caramelizada, catupiry e mussarela</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Costela Desfiada"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Costela Desfiada" data-price="55.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card premium" id="card-parma">
@@ -325,8 +364,7 @@
                     <p class="card-desc">Molho de tomate, presunto parma, rúcula fresca, tomate seco e parmesão</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza Parma com Rúcula"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Parma com Rúcula" data-price="56.00">Adicionar</button>
                     </div>
                 </article>
             </div>
@@ -350,8 +388,7 @@
                     <p class="card-desc">Chocolate ao leite derretido, granulado e leite condensado</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Chocolate"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Chocolate" data-price="38.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card doce" id="card-prestigio">
@@ -362,8 +399,7 @@
                     <p class="card-desc">Chocolate ao leite, coco ralado e leite condensado</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza Prestígio"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Prestígio" data-price="40.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card doce" id="card-romeu-julieta">
@@ -375,8 +411,7 @@
                     <p class="card-desc">Goiabada cremosa, queijo mussarela e leite condensado</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza Romeu e Julieta"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Romeu e Julieta" data-price="40.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card doce" id="card-banana-canela">
@@ -387,8 +422,7 @@
                     <p class="card-desc">Banana caramelizada, canela, açúcar e leite condensado</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza de Banana com Canela"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Banana c/ Canela" data-price="38.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card doce" id="card-ninho-nutella">
@@ -399,8 +433,7 @@
                     <p class="card-desc">Creme de leite ninho, Nutella, leite condensado e morangos</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza Ninho com Nutella"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Ninho c/ Nutella" data-price="45.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card doce" id="card-sensacao">
@@ -411,8 +444,7 @@
                     <p class="card-desc">Chocolate ao leite, morangos fatiados e leite condensado</p>
                     <div class="card-footer">
                         <span class="card-size">🍕 Grande</span>
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma pizza Sensação"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Sensação" data-price="42.00">Adicionar</button>
                     </div>
                 </article>
             </div>
@@ -434,8 +466,7 @@
                     </div>
                     <p class="card-desc">350ml</p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma Coca-Cola Lata"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Coca-Cola Lata" data-price="6.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card bebida" id="card-coca-2l">
@@ -445,8 +476,7 @@
                     </div>
                     <p class="card-desc">2 litros</p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma Coca-Cola 2L"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Coca-Cola 2L" data-price="14.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card bebida" id="card-guarana-lata">
@@ -456,8 +486,7 @@
                     </div>
                     <p class="card-desc">350ml</p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir um Guaraná Lata"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Guaraná Lata" data-price="5.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card bebida" id="card-guarana-2l">
@@ -467,8 +496,7 @@
                     </div>
                     <p class="card-desc">2 litros</p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir um Guaraná 2L"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Guaraná 2L" data-price="12.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card bebida" id="card-suco-natural">
@@ -478,8 +506,7 @@
                     </div>
                     <p class="card-desc">500ml - Diversos sabores</p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir um Suco Natural"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Suco Natural" data-price="10.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card bebida" id="card-agua">
@@ -489,8 +516,7 @@
                     </div>
                     <p class="card-desc">500ml - Com ou sem gás</p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir uma Água Mineral"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Água Mineral" data-price="4.00">Adicionar</button>
                     </div>
                 </article>
             </div>
@@ -513,8 +539,7 @@
                     <p class="card-desc">Escolha seu sabor favorito: chocolate, morango, baunilha, creme, flocos e muito
                         mais</p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir um sorvete de 1 bola"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Sorvete 1 Bola" data-price="8.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card sorvete" id="card-sorvete-2bolas">
@@ -525,8 +550,7 @@
                     </div>
                     <p class="card-desc">Combine dois sabores da nossa seleção especial com cobertura à sua escolha</p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir um sorvete de 2 bolas"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Sorvete 2 Bolas" data-price="14.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card sorvete" id="card-sorvete-3bolas">
@@ -536,8 +560,7 @@
                     </div>
                     <p class="card-desc">Três sabores com cobertura, chantilly, granulado e canudo</p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir um sorvete de 3 bolas"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Sorvete 3 Bolas" data-price="18.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card sorvete" id="card-sundae">
@@ -549,8 +572,7 @@
                     <p class="card-desc">3 bolas, calda quente de chocolate, chantilly, castanhas, granulado e cereja
                     </p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir um Sundae Especial"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Sundae Especial" data-price="22.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card sorvete" id="card-milkshake">
@@ -560,8 +582,7 @@
                     </div>
                     <p class="card-desc">500ml - Chocolate, morango, baunilha ou Ovomaltine com chantilly</p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir um Milkshake" class="card-order"
-                            target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Milkshake" data-price="18.00">Adicionar</button>
                     </div>
                 </article>
                 <article class="menu-card sorvete" id="card-acai">
@@ -571,8 +592,7 @@
                     </div>
                     <p class="card-desc">Açaí cremoso com granola, banana, leite condensado e leite em pó</p>
                     <div class="card-footer">
-                        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de pedir um Açaí 500ml"
-                            class="card-order" target="_blank">Pedir</a>
+                        <button type="button" class="card-order btn-add-comanda" data-name="Açaí 500ml" data-price="20.00">Adicionar</button>
                     </div>
                 </article>
             </div>
@@ -628,7 +648,7 @@
                 <p>🕕 Terça a Domingo a partir das 18h00</p>
             </div>
             <div class="footer-cta">
-                <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de fazer um pedido" class="footer-whatsapp-btn"
+                <a href="https://wa.me/5595991428625?text=Olá! Gostaria de fazer um pedido" class="footer-whatsapp-btn"
                     target="_blank">
                     Fazer Pedido pelo WhatsApp
                 </a>
@@ -640,8 +660,25 @@
     </footer>
 
     <script src="{{ asset('script.js') }}"></script>
+    <script src="{{ asset('comanda.js') }}"></script>
+    <p>📱 99142-86e25 | 📞 99142-9922</p>
+    <p>🕕 Terça a Domingo a partir das 18h00</p>
+    </div>
+    <div class="footer-cta">
+        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de fazer um pedido" class="footer-whatsapp-btn"
+            target="_blank">
+            Fazer Pedido pelo WhatsApp
+        </a>
+    </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2026 La Torre Pizzaria e Sorveteria. Todos os direitos reservados.</p>
+    </div>
+    </footer>
+
+    <script src="{{ asset('script.js') }}"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const button = document.getElementById('back-to-top');
 
             if (!button) {
@@ -653,10 +690,15 @@
             };
 
             button.addEventListener('click', () => {
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
 
-            window.addEventListener('scroll', toggleVisibility, { passive: true });
+            window.addEventListener('scroll', toggleVisibility, {
+                passive: true
+            });
             toggleVisibility();
         });
     </script>
