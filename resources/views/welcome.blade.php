@@ -14,7 +14,8 @@
 </head>
 
 <body>
-    <!-- Floating What    <a href="https://wa.me/5595991428625" target="_blank" class="whatsapp-float" id="whatsapp-float"
+    <!-- WhatsApp button -->
+    <a href="https://wa.me/5595991428625" target="_blank" class="whatsapp-float" id="whatsapp-float"
         aria-label="Fale conosco pelo WhatsApp">
         <svg viewBox="0 0 32 32" fill="currentColor">
             <path
@@ -661,22 +662,6 @@
 
     <script src="{{ asset('script.js') }}"></script>
     <script src="{{ asset('comanda.js') }}"></script>
-    <p>📱 99142-86e25 | 📞 99142-9922</p>
-    <p>🕕 Terça a Domingo a partir das 18h00</p>
-    </div>
-    <div class="footer-cta">
-        <a href="https://wa.me/5599142-8625?text=Olá! Gostaria de fazer um pedido" class="footer-whatsapp-btn"
-            target="_blank">
-            Fazer Pedido pelo WhatsApp
-        </a>
-    </div>
-    </div>
-    <div class="footer-bottom">
-        <p>&copy; 2026 La Torre Pizzaria e Sorveteria. Todos os direitos reservados.</p>
-    </div>
-    </footer>
-
-    <script src="{{ asset('script.js') }}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const button = document.getElementById('back-to-top');

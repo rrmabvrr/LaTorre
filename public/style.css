@@ -381,7 +381,7 @@ a {
 
 /* Scroll Indicator */
 .hero-scroll-indicator {
-    position: absolute;
+    /* position: absolute; */
     bottom: 30px;
     transform: translateX(-50%);
     text-align: center;
@@ -1510,10 +1510,10 @@ a {
    ============================================ */
 @media (max-width: 768px) {
     .comanda-toggle {
-        bottom: 84px;
+        bottom: 20px;
         right: 20px;
-        width: 52px;
-        height: 52px;
+        width: 56px;
+        height: 56px;
     }
 
     .comanda-toggle svg {
