@@ -109,12 +109,10 @@
                 </div>
             </div>
             <nav class="menu-nav text-uppercase" id="menu-nav">
-                <a href="#tradicionais" class="nav-pill active" data-category="tradicionais">TRADICIONAIS</a>
-                <a href="#especiais" class="nav-pill" data-category="especiais">ESPECIAIS</a>
-                <a href="#premium" class="nav-pill" data-category="premium">PREMIUM</a>
-                <a href="#doces" class="nav-pill" data-category="doces">DOCES</a>
-                <a href="#bebidas" class="nav-pill" data-category="bebidas">BEBIDAS</a>
-                <a href="#sorvetes" class="nav-pill" data-category="sorvetes">SORVETES</a>
+                @foreach ($categories as $categoryKey => $category)
+                    <a href="#{{ $categoryKey }}" class="nav-pill {{ $loop->first ? 'active' : '' }}"
+                        data-category="{{ $categoryKey }}">{{ $category['nav'] }}</a>
+                @endforeach
             </nav>
         </div>
         <div class="hero-scroll-indicator">
@@ -125,479 +123,44 @@
 
     <!-- Main Menu -->
     <main class="menu-container" id="menu-container">
-
-        <!-- Tradicionais -->
-        <section class="menu-section" id="tradicionais">
-            <div class="section-header">
-                <div class="section-icon">🍕</div>
-                <h2 class="section-title">Pizzas Tradicionais</h2>
-                <p class="section-desc">Clássicos que conquistam paladares</p>
-                <div class="section-divider"></div>
-            </div>
-            <div class="menu-grid">
-                <article class="menu-card" id="card-mussarela">
-                    <div class="card-badge">Popular</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Mussarela</h3>
-                        <span class="card-price">R$ 35,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate especial, mussarela derretida, orégano e azeitonas</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Mussarela" data-price="35.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card" id="card-calabresa">
-                    <div class="card-badge bestseller">Mais Vendida</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Calabresa</h3>
-                        <span class="card-price">R$ 38,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, calabresa fatiada, cebola, mussarela e orégano</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Calabresa" data-price="38.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card" id="card-portuguesa">
-                    <div class="card-header">
-                        <h3 class="card-title">Portuguesa</h3>
-                        <span class="card-price">R$ 40,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, presunto, ovos, cebola, azeitona, ervilha e mussarela</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Portuguesa" data-price="40.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card" id="card-margherita">
-                    <div class="card-header">
-                        <h3 class="card-title">Margherita</h3>
-                        <span class="card-price">R$ 38,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, mussarela de búfala, tomate fresco, manjericão e azeite</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Margherita" data-price="38.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card" id="card-frango-catupiry">
-                    <div class="card-badge">Popular</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Frango c/ Catupiry</h3>
-                        <span class="card-price">R$ 40,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, frango desfiado, catupiry cremoso, milho e mussarela</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Frango c/ Catupiry" data-price="40.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card" id="card-quatro-queijos-trad">
-                    <div class="card-header">
-                        <h3 class="card-title">Quatro Queijos</h3>
-                        <span class="card-price">R$ 42,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, mussarela, provolone, parmesão e catupiry</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Quatro Queijos" data-price="42.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card" id="card-napolitana">
-                    <div class="card-header">
-                        <h3 class="card-title">Napolitana</h3>
-                        <span class="card-price">R$ 38,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, mussarela, tomate fatiado, parmesão e manjericão</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Napolitana" data-price="38.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card" id="card-bacon">
-                    <div class="card-header">
-                        <h3 class="card-title">Bacon</h3>
-                        <span class="card-price">R$ 40,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, bacon crocante, mussarela, cebola e orégano</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Bacon" data-price="40.00">Adicionar</button>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Especiais -->
-        <section class="menu-section" id="especiais">
-            <div class="section-header">
-                <div class="section-icon">⭐</div>
-                <h2 class="section-title">Pizzas Especiais</h2>
-                <p class="section-desc">Criações exclusivas do nosso pizzaiolo</p>
-                <div class="section-divider"></div>
-            </div>
-            <div class="menu-grid">
-                <article class="menu-card especial" id="card-carne-sol">
-                    <div class="card-badge especial-badge">Especial</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Carne de Sol</h3>
-                        <span class="card-price">R$ 48,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, carne de sol desfiada, cebola caramelizada, catupiry e
-                        mussarela</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Carne de Sol" data-price="48.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card especial" id="card-camarao">
-                    <div class="card-badge especial-badge">Especial</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Camarão</h3>
-                        <span class="card-price">R$ 55,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, camarões selecionados, catupiry, mussarela e cebolinha</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Camarão" data-price="55.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card especial" id="card-peperoni">
-                    <div class="card-header">
-                        <h3 class="card-title">Pepperoni</h3>
-                        <span class="card-price">R$ 45,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, pepperoni artesanal, mussarela especial e orégano</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Pepperoni" data-price="45.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card especial" id="card-la-torre">
-                    <div class="card-badge bestseller">Da Casa</div>
-                    <div class="card-header">
-                        <h3 class="card-title">La Torre Especial</h3>
-                        <span class="card-price">R$ 52,00</span>
-                    </div>
-                    <p class="card-desc">Molho especial, carne seca, bacon, catupiry, cebola roxa, rúcula e mussarela
-                    </p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza La Torre Especial" data-price="52.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card especial" id="card-strogonoff">
-                    <div class="card-header">
-                        <h3 class="card-title">Strogonoff</h3>
-                        <span class="card-price">R$ 45,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, strogonoff de frango, batata palha, mussarela e catupiry</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Strogonoff" data-price="45.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card especial" id="card-lombo-canadense">
-                    <div class="card-header">
-                        <h3 class="card-title">Lombo Canadense</h3>
-                        <span class="card-price">R$ 48,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, lombo canadense, catupiry, mussarela e cebola caramelizada</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Lombo Canadense" data-price="48.00">Adicionar</button>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Premium -->
-        <section class="menu-section" id="premium">
-            <div class="section-header">
-                <div class="section-icon">👑</div>
-                <h2 class="section-title">Pizzas Premium</h2>
-                <p class="section-desc">Para momentos especiais</p>
-                <div class="section-divider"></div>
-            </div>
-            <div class="menu-grid">
-                <article class="menu-card premium" id="card-filé-mignon">
-                    <div class="card-badge premium-badge">Premium</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Filé Mignon</h3>
-                        <span class="card-price">R$ 58,00</span>
-                    </div>
-                    <p class="card-desc">Molho especial, filé mignon em tiras, champignon, catupiry e mussarela</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Filé Mignon" data-price="58.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card premium" id="card-salmao">
-                    <div class="card-badge premium-badge">Premium</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Salmão</h3>
-                        <span class="card-price">R$ 62,00</span>
-                    </div>
-                    <p class="card-desc">Cream cheese, salmão defumado, alcaparras, cebola roxa e cebolinha</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Salmão" data-price="62.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card premium" id="card-costela">
-                    <div class="card-badge premium-badge">Premium</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Costela Desfiada</h3>
-                        <span class="card-price">R$ 55,00</span>
-                    </div>
-                    <p class="card-desc">Molho barbecue, costela desfiada, cebola caramelizada, catupiry e mussarela</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Costela Desfiada" data-price="55.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card premium" id="card-parma">
-                    <div class="card-header">
-                        <h3 class="card-title">Parma com Rúcula</h3>
-                        <span class="card-price">R$ 56,00</span>
-                    </div>
-                    <p class="card-desc">Molho de tomate, presunto parma, rúcula fresca, tomate seco e parmesão</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Parma com Rúcula" data-price="56.00">Adicionar</button>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Doces -->
-        <section class="menu-section" id="doces">
-            <div class="section-header">
-                <div class="section-icon">🍫</div>
-                <h2 class="section-title">Pizzas Doces</h2>
-                <p class="section-desc">Sobremesas irresistíveis</p>
-                <div class="section-divider"></div>
-            </div>
-            <div class="menu-grid">
-                <article class="menu-card doce" id="card-chocolate">
-                    <div class="card-badge doce-badge">Doce</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Chocolate</h3>
-                        <span class="card-price">R$ 38,00</span>
-                    </div>
-                    <p class="card-desc">Chocolate ao leite derretido, granulado e leite condensado</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Chocolate" data-price="38.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card doce" id="card-prestigio">
-                    <div class="card-header">
-                        <h3 class="card-title">Prestígio</h3>
-                        <span class="card-price">R$ 40,00</span>
-                    </div>
-                    <p class="card-desc">Chocolate ao leite, coco ralado e leite condensado</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Prestígio" data-price="40.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card doce" id="card-romeu-julieta">
-                    <div class="card-badge bestseller">Favorita</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Romeu e Julieta</h3>
-                        <span class="card-price">R$ 40,00</span>
-                    </div>
-                    <p class="card-desc">Goiabada cremosa, queijo mussarela e leite condensado</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Romeu e Julieta" data-price="40.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card doce" id="card-banana-canela">
-                    <div class="card-header">
-                        <h3 class="card-title">Banana c/ Canela</h3>
-                        <span class="card-price">R$ 38,00</span>
-                    </div>
-                    <p class="card-desc">Banana caramelizada, canela, açúcar e leite condensado</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Banana c/ Canela" data-price="38.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card doce" id="card-ninho-nutella">
-                    <div class="card-header">
-                        <h3 class="card-title">Ninho c/ Nutella</h3>
-                        <span class="card-price">R$ 45,00</span>
-                    </div>
-                    <p class="card-desc">Creme de leite ninho, Nutella, leite condensado e morangos</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Ninho c/ Nutella" data-price="45.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card doce" id="card-sensacao">
-                    <div class="card-header">
-                        <h3 class="card-title">Sensação</h3>
-                        <span class="card-price">R$ 42,00</span>
-                    </div>
-                    <p class="card-desc">Chocolate ao leite, morangos fatiados e leite condensado</p>
-                    <div class="card-footer">
-                        <span class="card-size">🍕 Grande</span>
-                        <button type="button" class="card-order btn-add-comanda" data-name="Pizza Sensação" data-price="42.00">Adicionar</button>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Bebidas -->
-        <section class="menu-section" id="bebidas">
-            <div class="section-header">
-                <div class="section-icon">🥤</div>
-                <h2 class="section-title">Bebidas</h2>
-                <p class="section-desc">Para acompanhar sua pizza</p>
-                <div class="section-divider"></div>
-            </div>
-            <div class="menu-grid bebidas-grid">
-                <article class="menu-card bebida" id="card-coca-lata">
-                    <div class="card-header">
-                        <h3 class="card-title">Coca-Cola Lata</h3>
-                        <span class="card-price">R$ 6,00</span>
-                    </div>
-                    <p class="card-desc">350ml</p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Coca-Cola Lata" data-price="6.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card bebida" id="card-coca-2l">
-                    <div class="card-header">
-                        <h3 class="card-title">Coca-Cola 2L</h3>
-                        <span class="card-price">R$ 14,00</span>
-                    </div>
-                    <p class="card-desc">2 litros</p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Coca-Cola 2L" data-price="14.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card bebida" id="card-guarana-lata">
-                    <div class="card-header">
-                        <h3 class="card-title">Guaraná Lata</h3>
-                        <span class="card-price">R$ 5,00</span>
-                    </div>
-                    <p class="card-desc">350ml</p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Guaraná Lata" data-price="5.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card bebida" id="card-guarana-2l">
-                    <div class="card-header">
-                        <h3 class="card-title">Guaraná 2L</h3>
-                        <span class="card-price">R$ 12,00</span>
-                    </div>
-                    <p class="card-desc">2 litros</p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Guaraná 2L" data-price="12.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card bebida" id="card-suco-natural">
-                    <div class="card-header">
-                        <h3 class="card-title">Suco Natural</h3>
-                        <span class="card-price">R$ 10,00</span>
-                    </div>
-                    <p class="card-desc">500ml - Diversos sabores</p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Suco Natural" data-price="10.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card bebida" id="card-agua">
-                    <div class="card-header">
-                        <h3 class="card-title">Água Mineral</h3>
-                        <span class="card-price">R$ 4,00</span>
-                    </div>
-                    <p class="card-desc">500ml - Com ou sem gás</p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Água Mineral" data-price="4.00">Adicionar</button>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- Sorvetes -->
-        <section class="menu-section" id="sorvetes">
-            <div class="section-header">
-                <div class="section-icon">🍨</div>
-                <h2 class="section-title">Sorvetes</h2>
-                <p class="section-desc">Refrescância em cada colherada</p>
-                <div class="section-divider"></div>
-            </div>
-            <div class="menu-grid">
-                <article class="menu-card sorvete" id="card-sorvete-1bola">
-                    <div class="card-header">
-                        <h3 class="card-title">1 Bola</h3>
-                        <span class="card-price">R$ 8,00</span>
-                    </div>
-                    <p class="card-desc">Escolha seu sabor favorito: chocolate, morango, baunilha, creme, flocos e muito
-                        mais</p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Sorvete 1 Bola" data-price="8.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card sorvete" id="card-sorvete-2bolas">
-                    <div class="card-badge">Popular</div>
-                    <div class="card-header">
-                        <h3 class="card-title">2 Bolas</h3>
-                        <span class="card-price">R$ 14,00</span>
-                    </div>
-                    <p class="card-desc">Combine dois sabores da nossa seleção especial com cobertura à sua escolha</p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Sorvete 2 Bolas" data-price="14.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card sorvete" id="card-sorvete-3bolas">
-                    <div class="card-header">
-                        <h3 class="card-title">3 Bolas</h3>
-                        <span class="card-price">R$ 18,00</span>
-                    </div>
-                    <p class="card-desc">Três sabores com cobertura, chantilly, granulado e canudo</p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Sorvete 3 Bolas" data-price="18.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card sorvete" id="card-sundae">
-                    <div class="card-badge bestseller">Imperdível</div>
-                    <div class="card-header">
-                        <h3 class="card-title">Sundae Especial</h3>
-                        <span class="card-price">R$ 22,00</span>
-                    </div>
-                    <p class="card-desc">3 bolas, calda quente de chocolate, chantilly, castanhas, granulado e cereja
-                    </p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Sundae Especial" data-price="22.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card sorvete" id="card-milkshake">
-                    <div class="card-header">
-                        <h3 class="card-title">Milkshake</h3>
-                        <span class="card-price">R$ 18,00</span>
-                    </div>
-                    <p class="card-desc">500ml - Chocolate, morango, baunilha ou Ovomaltine com chantilly</p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Milkshake" data-price="18.00">Adicionar</button>
-                    </div>
-                </article>
-                <article class="menu-card sorvete" id="card-acai">
-                    <div class="card-header">
-                        <h3 class="card-title">Açaí 500ml</h3>
-                        <span class="card-price">R$ 20,00</span>
-                    </div>
-                    <p class="card-desc">Açaí cremoso com granola, banana, leite condensado e leite em pó</p>
-                    <div class="card-footer">
-                        <button type="button" class="card-order btn-add-comanda" data-name="Açaí 500ml" data-price="20.00">Adicionar</button>
-                    </div>
-                </article>
-            </div>
-        </section>
+        @foreach ($categories as $categoryKey => $category)
+            @php
+                $items = $groupedItems->get($categoryKey, collect());
+                $sectionClasses = trim('menu-grid ' . ($categoryKey === 'bebidas' ? 'bebidas-grid' : ''));
+            @endphp
+            <section class="menu-section" id="{{ $categoryKey }}">
+                <div class="section-header">
+                    <div class="section-icon">{{ $category['icon'] }}</div>
+                    <h2 class="section-title">{{ $category['title'] }}</h2>
+                    <p class="section-desc">{{ $category['description'] }}</p>
+                    <div class="section-divider"></div>
+                </div>
+                <div class="{{ $sectionClasses }}">
+                    @forelse ($items as $item)
+                        <article class="menu-card {{ $category['cardClass'] }}" id="card-item-{{ $item->id }}">
+                            <div class="card-header">
+                                <h3 class="card-title">{{ $item->name }}</h3>
+                                <span class="card-price">R$ {{ number_format((float) $item->price, 2, ',', '.') }}</span>
+                            </div>
+                            @if ($item->description)
+                                <p class="card-desc">{{ $item->description }}</p>
+                            @endif
+                            <div class="card-footer">
+                                @if (in_array($categoryKey, ['tradicionais', 'especiais', 'premium', 'doces'], true))
+                                    <span class="card-size">🍕 Grande</span>
+                                @endif
+                                <button type="button" class="card-order btn-add-comanda" data-name="{{ $item->name }}"
+                                    data-price="{{ number_format((float) $item->price, 2, '.', '') }}">Adicionar</button>
+                            </div>
+                        </article>
+                    @empty
+                        <article class="menu-card {{ $category['cardClass'] }}" style="grid-column: 1 / -1;">
+                            <p class="card-desc">Nenhum item disponivel nesta categoria no momento.</p>
+                        </article>
+                    @endforelse
+                </div>
+            </section>
+        @endforeach
 
         <!-- Info Section -->
         <section class="info-banner" id="info-banner">
