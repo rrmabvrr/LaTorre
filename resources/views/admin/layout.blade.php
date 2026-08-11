@@ -26,9 +26,9 @@
         }
 
         .container {
-            width: min(1100px, 92vw);
+            width: min(1100px, 94vw);
             margin: 0 auto;
-            padding: 24px 0 48px;
+            padding: 16px 0 32px;
         }
 
         .topbar {
@@ -38,12 +38,12 @@
         }
 
         .topbar-inner {
-            width: min(1100px, 92vw);
+            width: min(1100px, 94vw);
             margin: 0 auto;
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 16px;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 10px;
         }
 
         .brand {
@@ -51,12 +51,28 @@
             font-size: 18px;
             text-decoration: none;
             color: var(--text);
+            text-align: center;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .brand-logo {
+            width: 34px;
+            height: 34px;
+            display: block;
         }
 
         .actions {
             display: flex;
-            align-items: center;
+            flex-direction: column;
+            align-items: stretch;
             gap: 10px;
+        }
+
+        .actions form {
+            width: 100%;
         }
 
         .btn {
@@ -71,6 +87,7 @@
             justify-content: center;
             background: #efefef;
             color: var(--text);
+            width: 100%;
         }
 
         .btn-primary {
@@ -79,6 +96,15 @@
         }
 
         .btn-primary:hover { background: var(--accent-strong); }
+
+        .btn-success {
+            background: #1f7a40;
+            color: #fff;
+        }
+
+        .btn-success:hover {
+            background: #176132;
+        }
 
         .btn-danger {
             background: #b81f1f;
@@ -89,7 +115,7 @@
             background: var(--card);
             border: 1px solid var(--border);
             border-radius: 14px;
-            padding: 18px;
+            padding: 14px;
         }
 
         .flash {
@@ -155,12 +181,200 @@
 
         .row-actions {
             display: flex;
+            flex-direction: column;
             gap: 8px;
         }
 
-        @media (max-width: 740px) {
-            .table-wrap { overflow-x: auto; }
-            .row-actions { flex-wrap: wrap; }
+        .row-actions form {
+            width: 100%;
+        }
+
+        .row-actions .btn {
+            width: 100%;
+        }
+
+        .page-head {
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+        }
+
+        .mobile-list {
+            display: grid;
+            gap: 10px;
+        }
+
+        .item-card {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 12px;
+            background: #fff;
+        }
+
+        .item-card-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .item-card-title {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .item-meta {
+            margin: 0;
+            display: grid;
+            gap: 4px;
+            font-size: 14px;
+        }
+
+        .desktop-only {
+            display: none;
+        }
+
+        .mobile-only {
+            display: block;
+        }
+
+        .actions-inline {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .pagination-wrap {
+            margin-top: 14px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .pagination-mobile {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pagination-mobile .btn {
+            min-height: 40px;
+        }
+
+        .pagination-status {
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        .pagination-desktop {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .page-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            min-width: 40px;
+            height: 40px;
+            padding: 0 12px;
+            text-decoration: none;
+            font-weight: 600;
+            color: var(--text);
+            background: #fff;
+        }
+
+        .page-link.active {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .page-link.disabled {
+            opacity: 0.5;
+            pointer-events: none;
+            background: #f2efe9;
+        }
+
+        @media (min-width: 741px) {
+            .container {
+                width: min(1100px, 92vw);
+                padding: 24px 0 48px;
+            }
+
+            .topbar-inner {
+                width: min(1100px, 92vw);
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+                gap: 16px;
+            }
+
+            .brand {
+                text-align: left;
+                justify-content: flex-start;
+            }
+
+            .actions {
+                flex-direction: row;
+                align-items: center;
+            }
+
+            .actions form,
+            .btn {
+                width: auto;
+            }
+
+            .card {
+                padding: 18px;
+            }
+
+            .row-actions {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+
+            .row-actions form,
+            .row-actions .btn {
+                width: auto;
+            }
+
+            .page-head {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+
+            .desktop-only {
+                display: block;
+            }
+
+            .mobile-only {
+                display: none;
+            }
+
+            .actions-inline {
+                flex-direction: row;
+                gap: 10px;
+            }
+
+            .pagination-mobile .btn {
+                width: 100%;
+            }
+
+            .table-wrap {
+                overflow-x: auto;
+            }
         }
     </style>
 </head>
@@ -168,9 +382,12 @@
 <body>
     <header class="topbar">
         <div class="topbar-inner">
-            <a href="{{ route('admin.items.index') }}" class="brand">La Torre Admin</a>
+            <a href="{{ route('admin.items.index') }}" class="brand">
+                <img class="brand-logo" src="{{ asset('img/Logo_LaTorre.svg') }}" alt="La Torre">
+                <span>La Torre Admin</span>
+            </a>
             <div class="actions">
-                <a class="btn" href="{{ route('menu.index') }}" target="_blank">Ver Cardapio</a>
+                <a class="btn" href="{{ route('menu.index') }}" target="_blank">Ver Cardápio</a>
                 @auth
                     <form action="{{ route('admin.logout') }}" method="POST">
                         @csrf

@@ -6,7 +6,7 @@
     </div>
 
     <div class="field">
-        <label for="description">Descricao</label>
+        <label for="description">Descrição</label>
         <textarea id="description" name="description" rows="3" maxlength="1200">{{ old('description', $item->description) }}</textarea>
     </div>
 
@@ -22,7 +22,7 @@
     </div>
 
     <div class="field">
-        <label for="price">Preco (R$)</label>
+        <label for="price">Preço (R$)</label>
         <input id="price" name="price" type="number" value="{{ old('price', $item->price) }}" min="0" step="0.01" required>
     </div>
 
@@ -34,10 +34,10 @@
     <label for="is_available" style="display:flex;align-items:center;gap:8px;">
         <input id="is_available" name="is_available" type="checkbox" value="1"
             @checked(old('is_available', $item->is_available ?? true))>
-        Disponivel no cardapio
+        Disponível no cardápio
     </label>
 
-    <div style="display:flex;gap:10px;">
+    <div class="actions-inline">
         <button class="btn btn-primary" type="submit">Salvar</button>
         <a class="btn" href="{{ route('admin.items.index') }}">Cancelar</a>
     </div>

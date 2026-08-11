@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
         User::updateOrCreate(
             ['email' => 'admin@latorre.com'],
             [
-                'name' => 'Administrador',
+                'name' => 'Admin',
                 'password' => Hash::make('admin123'),
             ]
         );
@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             MenuItem::insert([
                 [
                     'name' => 'Pizza Mussarela',
-                    'description' => 'Molho de tomate especial, mussarela e oregano.',
+                    'description' => 'Molho de tomate especial, mussarela e orégano.',
                     'category' => 'tradicionais',
                     'price' => 35.00,
                     'is_available' => true,
@@ -36,8 +36,8 @@ class DatabaseSeeder extends Seeder
                     'updated_at' => now(),
                 ],
                 [
-                    'name' => 'Pizza Camarao',
-                    'description' => 'Camaroes selecionados com catupiry e cebolinha.',
+                    'name' => 'Pizza Camarão',
+                    'description' => 'Camarões selecionados com catupiry e cebolinha.',
                     'category' => 'especiais',
                     'price' => 55.00,
                     'is_available' => true,

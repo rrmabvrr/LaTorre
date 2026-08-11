@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La Torre | Cardapio</title>
+    <title>La Torre | Cardápio</title>
     <style>
         :root {
             --bg: #f8f4ec;
@@ -98,7 +98,7 @@
 <body>
     <header class="hero">
         <h1>La Torre</h1>
-        <p class="subtitle">Cardapio digital atualizado</p>
+        <p class="subtitle">Cardápio digital atualizado</p>
         <a class="admin-link" href="{{ route('admin.login') }}">Entrar no Admin</a>
     </header>
 

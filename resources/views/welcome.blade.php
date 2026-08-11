@@ -155,7 +155,7 @@
                         </article>
                     @empty
                         <article class="menu-card {{ $category['cardClass'] }}" style="grid-column: 1 / -1;">
-                            <p class="card-desc">Nenhum item disponivel nesta categoria no momento.</p>
+                            <p class="card-desc">Nenhum item disponível nesta categoria no momento.</p>
                         </article>
                     @endforelse
                 </div>

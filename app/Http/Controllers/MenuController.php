@@ -16,14 +16,14 @@ class MenuController extends Controller
             'tradicionais' => [
                 'nav' => 'TRADICIONAIS',
                 'title' => 'Pizzas Tradicionais',
-                'description' => 'Classicos que conquistam paladares',
+                'description' => 'Clássicos que conquistam paladares',
                 'icon' => '🍕',
                 'cardClass' => '',
             ],
             'especiais' => [
                 'nav' => 'ESPECIAIS',
                 'title' => 'Pizzas Especiais',
-                'description' => 'Criacoes exclusivas do nosso pizzaiolo',
+                'description' => 'Criações exclusivas do nosso pizzaiolo',
                 'icon' => '⭐',
                 'cardClass' => 'especial',
             ],
@@ -37,7 +37,7 @@ class MenuController extends Controller
             'doces' => [
                 'nav' => 'DOCES',
                 'title' => 'Pizzas Doces',
-                'description' => 'Sobremesas irresistiveis',
+                'description' => 'Sobremesas irresistíveis',
                 'icon' => '🍫',
                 'cardClass' => 'doce',
             ],
@@ -51,7 +51,7 @@ class MenuController extends Controller
             'sorvetes' => [
                 'nav' => 'SORVETES',
                 'title' => 'Sorvetes',
-                'description' => 'Refrescancia em cada colherada',
+                'description' => 'Refrescância em cada colherada',
                 'icon' => '🍨',
                 'cardClass' => 'sorvete',
             ],
