@@ -1,12 +1,13 @@
 @php
     $pizzaCategories = ['tradicionais', 'especiais', 'nobres'];
+    $sizeCategories = ['tradicionais', 'especiais', 'nobres', 'sucos_naturais'];
     $selectedCategory = old('category', $item->category ?? null);
-    $sizes = old('sizes', $item->sizes ?? [
-        'MÉDIA' => null,
-        'GRANDE' => null,
-        'FAMÍLIA' => null,
-        'BIG' => null,
-    ]);
+    $sizeKeys = in_array($selectedCategory, $pizzaCategories, true)
+        ? ['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG']
+        : (in_array($selectedCategory, ['sucos_naturais'], true)
+            ? ['COPO', 'JARRA', 'ADICIONAL DE LEITE']
+            : []);
+    $sizes = old('sizes', $item->sizes ?? array_fill_keys($sizeKeys, null));
 @endphp
 
 @csrf
@@ -32,15 +33,15 @@
         </select>
     </div>
 
-    <div class="field" id="priceField" style="display: {{ in_array($selectedCategory, $pizzaCategories, true) ? 'none' : 'block' }};">
+    <div class="field" id="priceField" style="display: {{ in_array($selectedCategory, $sizeCategories, true) ? 'none' : 'block' }};">
         <label for="price">Preço (R$)</label>
-        <input id="price" name="price" type="number" value="{{ old('price', $item->price) }}" min="0" step="0.01" @required(!in_array($selectedCategory, $pizzaCategories, true))>
+        <input id="price" name="price" type="number" value="{{ old('price', $item->price) }}" min="0" step="0.01" @required(!in_array($selectedCategory, $sizeCategories, true))>
     </div>
 
-    <div class="field" id="pizzaSizesField" style="display: {{ in_array($selectedCategory, $pizzaCategories, true) ? 'block' : 'none' }};">
-        <label>Tamanhos e valores da pizza</label>
+    <div class="field" id="sizeValuesField" style="display: {{ in_array($selectedCategory, $sizeCategories, true) ? 'block' : 'none' }};">
+        <label>{{ in_array($selectedCategory, $pizzaCategories, true) ? 'Tamanhos e valores da pizza' : 'Opções e valores do suco natural' }}</label>
         <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-top: 8px;">
-            @foreach (['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG'] as $size)
+            @foreach ($sizeKeys as $size)
                 <div class="field" style="margin:0;">
                     <label for="sizes_{{ $size }}">{{ $size }}</label>
                     <input id="sizes_{{ $size }}" name="sizes[{{ $size }}]" type="number" min="0" step="0.01"
@@ -71,31 +72,31 @@
     document.addEventListener('DOMContentLoaded', function () {
         const categorySelect = document.getElementById('category');
         const priceField = document.getElementById('priceField');
-        const pizzaSizesField = document.getElementById('pizzaSizesField');
+        const sizeValuesField = document.getElementById('sizeValuesField');
         const priceInput = document.getElementById('price');
 
         if (!categorySelect) {
             return;
         }
 
-        const pizzaCategories = ['tradicionais', 'especiais', 'nobres'];
+        const sizeCategories = ['tradicionais', 'especiais', 'nobres', 'sucos_naturais'];
 
         const toggleFields = () => {
-            const isPizza = pizzaCategories.includes(categorySelect.value);
+            const requiresSizeValues = sizeCategories.includes(categorySelect.value);
 
             if (priceField) {
-                priceField.style.display = isPizza ? 'none' : 'block';
+                priceField.style.display = requiresSizeValues ? 'none' : 'block';
             }
 
-            if (pizzaSizesField) {
-                pizzaSizesField.style.display = isPizza ? 'block' : 'none';
+            if (sizeValuesField) {
+                sizeValuesField.style.display = requiresSizeValues ? 'block' : 'none';
             }
 
-            if (priceInput && isPizza) {
+            if (priceInput && requiresSizeValues) {
                 priceInput.removeAttribute('required');
             }
 
-            if (priceInput && !isPizza) {
+            if (priceInput && !requiresSizeValues) {
                 priceInput.setAttribute('required', 'required');
             }
         };

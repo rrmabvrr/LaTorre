@@ -120,12 +120,21 @@ class MenuItemController extends Controller
     }
 
     /**
+     * @return array<int, string>
+     */
+    private function juiceSizes(): array
+    {
+        return ['COPO', 'JARRA', 'ADICIONAL DE LEITE'];
+    }
+
+    /**
      * @param Request $request
      * @return array<string, mixed>
      */
     private function validatedData(Request $request): array
     {
         $pizzaCategories = ['tradicionais', 'especiais', 'nobres'];
+        $sizeCategories = ['tradicionais', 'especiais', 'nobres', 'sucos_naturais'];
         $rules = [
             'name' => ['required', 'string', 'max:120'],
             'description' => ['nullable', 'string', 'max:1200'],
@@ -134,11 +143,15 @@ class MenuItemController extends Controller
             'is_available' => ['sometimes', 'boolean'],
         ];
 
-        if (in_array($request->input('category'), $pizzaCategories, true)) {
+        if (in_array($request->input('category'), $sizeCategories, true)) {
             $rules['price'] = ['nullable', 'numeric', 'min:0'];
             $rules['sizes'] = ['nullable', 'array'];
 
-            foreach ($this->pizzaSizes() as $size) {
+            $sizeKeys = in_array($request->input('category'), $pizzaCategories, true)
+                ? $this->pizzaSizes()
+                : $this->juiceSizes();
+
+            foreach ($sizeKeys as $size) {
                 $rules["sizes.$size"] = ['nullable', 'numeric', 'min:0'];
             }
         } else {
@@ -147,17 +160,26 @@ class MenuItemController extends Controller
 
         $data = $request->validate($rules);
 
-        if (in_array($data['category'], $pizzaCategories, true)) {
+        if (in_array($data['category'], $sizeCategories, true)) {
+            $sizeKeys = in_array($data['category'], $pizzaCategories, true)
+                ? $this->pizzaSizes()
+                : $this->juiceSizes();
+
             $orderedSizes = [];
 
-            foreach ($this->pizzaSizes() as $size) {
+            foreach ($sizeKeys as $size) {
                 if (isset($data['sizes'][$size]) && (float) $data['sizes'][$size] > 0) {
                     $orderedSizes[$size] = (float) $data['sizes'][$size];
                 }
             }
 
             $data['sizes'] = $orderedSizes;
-            $data['price'] = $orderedSizes['MÉDIA'] ?? $data['price'] ?? 0;
+
+            if (in_array($data['category'], $pizzaCategories, true)) {
+                $data['price'] = $orderedSizes['MÉDIA'] ?? $data['price'] ?? 0;
+            } elseif (isset($orderedSizes['COPO'])) {
+                $data['price'] = $orderedSizes['COPO'];
+            }
         }
 
         $data['is_available'] = $request->boolean('is_available');

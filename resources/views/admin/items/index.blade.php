@@ -29,7 +29,7 @@
                     @endif
 
                     @if (!empty($item->sizes) && is_array($item->sizes))
-                        <p class="muted texto-curto" style="margin: 0 0 8px;">
+                        <p class="muted sizes-preview" style="margin: 0 0 8px;">
                             @foreach ($item->sizes as $sizeName => $sizeValue)
                                 {{ $sizeName }}: R$ {{ number_format((float) $sizeValue, 2, ',', '.') }}@if (! $loop->last), @endif
                             @endforeach
@@ -37,9 +37,9 @@
                     @endif
 
                     <p class="item-meta">
-                        <span><strong>Categoria:</strong> {{ $categories[$item->category] ?? ucfirst($item->category) }}</span>
-                        <span><strong>Ordem:</strong> {{ $item->display_order }}</span>
-                        <span><strong>Status:</strong> {{ $item->is_available ? 'Disponível' : 'Oculto' }}</span>
+                        <span class="truncated-text"><strong>Categoria:</strong> {{ $categories[$item->category] ?? ucfirst($item->category) }}</span>
+                        <span class="truncated-text"><strong>Ordem:</strong> {{ $item->display_order }}</span>
+                        <span class="truncated-text"><strong>Status:</strong> {{ $item->is_available ? 'Disponível' : 'Oculto' }}</span>
                     </p>
 
                     <div class="row-actions" style="margin-top: 10px;">
@@ -91,9 +91,9 @@
                         <td>{{ $categories[$item->category] ?? ucfirst($item->category) }}</td>
                         <td>
                             @if (!empty($item->sizes) && is_array($item->sizes))
-                                {{ count($item->sizes) }} tamanhos
+                                <span class="sizes-preview">{{ count($item->sizes) }} tamanhos</span>
                             @else
-                                R$ {{ number_format((float) $item->price, 2, ',', '.') }}
+                                <span class="price-preview">R$ {{ number_format((float) $item->price, 2, ',', '.') }}</span>
                             @endif
                         </td>
                         <td>{{ $item->display_order }}</td>

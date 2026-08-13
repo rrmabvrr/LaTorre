@@ -149,13 +149,16 @@
                             $itemPrice = is_object($item) ? (float) $item->price : (float) ($item['price'] ?? 0);
                             $itemDescription = is_object($item) ? $item->description : ($item['description'] ?? null);
                             $itemId = is_object($item) ? $item->id : ($item['id'] ?? $loop->index);
+                            $itemSizes = is_object($item)
+                                ? ($item->sizes ?? null)
+                                : ((is_array($item) && isset($item['sizes'])) ? $item['sizes'] : null);
                             $rawPizzaSizes = in_array($categoryKey, ['tradicionais', 'especiais', 'nobres'], true)
-                                ? ((is_object($item) && property_exists($item, 'sizes') && is_array($item->sizes)) ? $item->sizes : ((is_array($item) && isset($item['sizes']) && is_array($item['sizes'])) ? $item['sizes'] : [
+                                ? ((is_array($itemSizes) && ! empty($itemSizes)) ? $itemSizes : [
                                     'MÉDIA' => 39.90,
                                     'GRANDE' => 49.90,
                                     'FAMÍLIA' => 69.90,
                                     'BIG' => 89.90,
-                                ]))
+                                ])
                                 : null;
                             $pizzaSizes = [];
                             foreach (['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG'] as $sizeName) {
@@ -164,19 +167,16 @@
                                 }
                             }
                             $juiceOptions = in_array($categoryKey, ['sucos_naturais'], true)
-                                ? ((is_object($item) && property_exists($item, 'sizes') && is_array($item->sizes)) ? $item->sizes : ((is_array($item) && isset($item['sizes']) && is_array($item['sizes'])) ? $item['sizes'] : [
+                                ? ((is_array($itemSizes) && ! empty($itemSizes)) ? $itemSizes : [
                                     'COPO' => 12.00,
                                     'JARRA' => 24.00,
                                     'ADICIONAL DE LEITE' => 5.00,
-                                ]))
+                                ])
                                 : null;
                         @endphp
                         <article class="menu-card {{ $category['cardClass'] }}" id="card-item-{{ $itemId }}">
                             <div class="card-header">
                                 <h3 class="card-title">{{ $itemName }}</h3>
-                                @if (empty($pizzaSizes))
-                                    <span class="card-price">R$ {{ number_format($itemPrice, 2, ',', '.') }}</span>
-                                @endif
                             </div>
                             @if ($itemDescription)
                                 <p class="card-desc">{{ $itemDescription }}</p>

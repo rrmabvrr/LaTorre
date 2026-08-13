@@ -47,12 +47,14 @@
             margin: 0 0 8px;
             font-size: 23px;
             line-height: 1.2;
+            text-align: center;
         }
 
         p {
             color: #666;
             margin: 0 0 18px;
             font-size: 14px;
+            text-align: center;
         }
 
         .field {

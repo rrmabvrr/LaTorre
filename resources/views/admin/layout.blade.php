@@ -238,7 +238,7 @@
         }
 
         .texto-curto {
-            width: 250px;
+            max-width: 100%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -246,12 +246,17 @@
         }
 
         .sizes-preview,
-        .truncated-text {
+        .truncated-text,
+        .price-preview {
             display: block;
-            width: 250px;
+            max-width: 100%;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+
+        .item-card-head {
+            flex-wrap: wrap;
         }
 
         .desktop-only {
