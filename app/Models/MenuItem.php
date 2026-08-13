@@ -17,6 +17,7 @@ class MenuItem extends Model
         'description',
         'category',
         'price',
+        'sizes',
         'is_available',
         'display_order',
     ];
@@ -28,6 +29,7 @@ class MenuItem extends Model
     {
         return [
             'price' => 'decimal:2',
+            'sizes' => 'array',
             'is_available' => 'boolean',
         ];
     }

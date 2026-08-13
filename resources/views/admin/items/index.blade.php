@@ -16,12 +16,24 @@
             @forelse ($items as $item)
                 <article class="item-card">
                     <div class="item-card-head">
-                        <h2 class="item-card-title">{{ $item->name }}</h2>
-                        <strong>R$ {{ number_format((float) $item->price, 2, ',', '.') }}</strong>
+                        <h2 class="item-card-title texto-curto">{{ $item->name }}</h2>
+                        @if (!empty($item->sizes) && is_array($item->sizes))
+                            <strong>{{ count($item->sizes) }} tamanhos</strong>
+                        @else
+                            <strong>R$ {{ number_format((float) $item->price, 2, ',', '.') }}</strong>
+                        @endif
                     </div>
 
                     @if ($item->description)
-                        <p class="muted" style="margin: 0 0 8px;">{{ $item->description }}</p>
+                        <p class="muted texto-curto" style="margin: 0 0 8px;">{{ $item->description }}</p>
+                    @endif
+
+                    @if (!empty($item->sizes) && is_array($item->sizes))
+                        <p class="muted texto-curto" style="margin: 0 0 8px;">
+                            @foreach ($item->sizes as $sizeName => $sizeValue)
+                                {{ $sizeName }}: R$ {{ number_format((float) $sizeValue, 2, ',', '.') }}@if (! $loop->last), @endif
+                            @endforeach
+                        </p>
                     @endif
 
                     <p class="item-meta">
@@ -64,13 +76,26 @@
                 @forelse ($items as $item)
                     <tr>
                         <td>
-                            <strong>{{ $item->name }}</strong>
+                            <strong class="texto-curto">{{ $item->name }}</strong>
                             @if ($item->description)
-                                <div class="muted">{{ $item->description }}</div>
+                                <div class="muted texto-curto">{{ $item->description }}</div>
+                            @endif
+                            @if (!empty($item->sizes) && is_array($item->sizes))
+                                <div class="muted texto-curto">
+                                    @foreach ($item->sizes as $sizeName => $sizeValue)
+                                        {{ $sizeName }}: R$ {{ number_format((float) $sizeValue, 2, ',', '.') }}@if (! $loop->last) | @endif
+                                    @endforeach
+                                </div>
                             @endif
                         </td>
                         <td>{{ $categories[$item->category] ?? ucfirst($item->category) }}</td>
-                        <td>R$ {{ number_format((float) $item->price, 2, ',', '.') }}</td>
+                        <td>
+                            @if (!empty($item->sizes) && is_array($item->sizes))
+                                {{ count($item->sizes) }} tamanhos
+                            @else
+                                R$ {{ number_format((float) $item->price, 2, ',', '.') }}
+                            @endif
+                        </td>
                         <td>{{ $item->display_order }}</td>
                         <td>{{ $item->is_available ? 'Disponível' : 'Oculto' }}</td>
                         <td>

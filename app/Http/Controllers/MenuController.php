@@ -27,19 +27,26 @@ class MenuController extends Controller
                 'icon' => '⭐',
                 'cardClass' => 'especial',
             ],
-            'premium' => [
-                'nav' => 'PREMIUM',
-                'title' => 'Pizzas Premium',
-                'description' => 'Para momentos especiais',
+            'nobres' => [
+                'nav' => 'NOBRES',
+                'title' => 'Pizzas Nobres',
+                'description' => 'Sabor refinado para ocasiões especiais',
                 'icon' => '👑',
                 'cardClass' => 'premium',
             ],
-            'doces' => [
-                'nav' => 'DOCES',
-                'title' => 'Pizzas Doces',
-                'description' => 'Sobremesas irresistíveis',
-                'icon' => '🍫',
-                'cardClass' => 'doce',
+            'sucos_naturais' => [
+                'nav' => 'SUCOS NATURAIS',
+                'title' => 'Sucos Naturais',
+                'description' => 'Refrescância e sabor natural',
+                'icon' => '🥤',
+                'cardClass' => 'bebida',
+            ],
+            'tira_gosto' => [
+                'nav' => 'TIRA GOSTO',
+                'title' => 'Tira Gosto',
+                'description' => 'Petiscos para acompanhar',
+                'icon' => '🍽️',
+                'cardClass' => 'bebida',
             ],
             'bebidas' => [
                 'nav' => 'BEBIDAS',
@@ -48,12 +55,68 @@ class MenuController extends Controller
                 'icon' => '🥤',
                 'cardClass' => 'bebida',
             ],
+            'cervejas' => [
+                'nav' => 'CERVEJAS',
+                'title' => 'Cervejas',
+                'description' => 'Geladas para alegrar o momento',
+                'icon' => '🍺',
+                'cardClass' => 'bebida',
+            ],
             'sorvetes' => [
                 'nav' => 'SORVETES',
                 'title' => 'Sorvetes',
                 'description' => 'Refrescância em cada colherada',
                 'icon' => '🍨',
                 'cardClass' => 'sorvete',
+            ],
+        ];
+
+        $pizzaSizes = [
+            'MÉDIA' => 39.90,
+            'GRANDE' => 49.90,
+            'FAMÍLIA' => 69.90,
+            'BIG' => 89.90,
+        ];
+
+        $defaultItems = [
+            'tradicionais' => [
+                ['name' => 'Mussarela', 'description' => 'Molho de tomate, mussarela e orégano', 'sizes' => $pizzaSizes],
+                ['name' => 'Calabresa', 'description' => 'Calabresa, cebola e mussarela', 'sizes' => array_map(fn ($price) => $price + 5.00, $pizzaSizes)],
+                ['name' => 'Frango com Catupiry', 'description' => 'Frango desfiado e catupiry', 'sizes' => array_map(fn ($price) => $price + 7.50, $pizzaSizes)],
+                ['name' => 'Pepperoni', 'description' => 'Pepperoni artesanal e mussarela', 'sizes' => array_map(fn ($price) => $price + 8.00, $pizzaSizes)],
+            ],
+            'especiais' => [
+                ['name' => 'Camarão', 'description' => 'Camarão com catupiry e cebolinha', 'sizes' => ['MÉDIA' => 44.90, 'GRANDE' => 54.90, 'FAMÍLIA' => 74.90, 'BIG' => 94.90]],
+                ['name' => '4 Queijos', 'description' => 'Muçarela, catupiry, parmesão e gorgonzola', 'sizes' => ['MÉDIA' => 46.90, 'GRANDE' => 56.90, 'FAMÍLIA' => 76.90, 'BIG' => 96.90]],
+                ['name' => 'Portuguesa', 'description' => 'Presunto, cebola, ovo e azeitona', 'sizes' => ['MÉDIA' => 45.90, 'GRANDE' => 55.90, 'FAMÍLIA' => 75.90, 'BIG' => 95.90]],
+                ['name' => 'Brócolis com Bacon', 'description' => 'Brócolis, bacon e queijo', 'sizes' => ['MÉDIA' => 47.90, 'GRANDE' => 57.90, 'FAMÍLIA' => 77.90, 'BIG' => 97.90]],
+            ],
+            'nobres' => [
+                ['name' => 'Trufada', 'description' => 'Molho trufado e queijo premium', 'sizes' => ['MÉDIA' => 49.90, 'GRANDE' => 59.90, 'FAMÍLIA' => 79.90, 'BIG' => 99.90]],
+                ['name' => 'Alho e Óleo', 'description' => 'Alho, óleo e parmesão', 'sizes' => ['MÉDIA' => 48.90, 'GRANDE' => 58.90, 'FAMÍLIA' => 78.90, 'BIG' => 98.90]],
+                ['name' => 'Mignon com Gorgonzola', 'description' => 'Mignon, gorgonzola e rúcula', 'sizes' => ['MÉDIA' => 52.90, 'GRANDE' => 62.90, 'FAMÍLIA' => 84.90, 'BIG' => 104.90]],
+                ['name' => 'Salmão', 'description' => 'Salmão, cream cheese e cebola roxa', 'sizes' => ['MÉDIA' => 54.90, 'GRANDE' => 64.90, 'FAMÍLIA' => 86.90, 'BIG' => 106.90]],
+            ],
+            'sucos_naturais' => [
+                ['name' => 'COPO', 'description' => 'Suco natural em copo', 'price' => 12.00],
+                ['name' => 'JARRA', 'description' => 'Suco natural em jarra', 'price' => 24.00],
+                ['name' => 'ADICIONAL DE LEITE', 'description' => 'Extra de leite', 'price' => 5.00],
+            ],
+            'tira_gosto' => [
+                ['name' => 'PORÇÃO', 'description' => 'Porção de tira gosto', 'price' => 18.90],
+                ['name' => 'PORÇÃO MISTA', 'description' => 'Porção mista', 'price' => 29.90],
+            ],
+            'bebidas' => [
+                ['name' => 'Refrigerante 600ml', 'description' => 'Lata ou garrafa', 'price' => 8.00],
+                ['name' => 'Água Mineral 500ml', 'description' => 'Com gás ou sem gás', 'price' => 6.00],
+            ],
+            'cervejas' => [
+                ['name' => 'LONG NECK', 'description' => 'Cerveja gelada', 'price' => 14.90],
+                ['name' => 'LATA 350ml', 'description' => 'Cerveja gelada', 'price' => 9.90],
+            ],
+            'sorvetes' => [
+                ['name' => 'Casquinha', 'description' => 'Sabor de escolha', 'price' => 8.00],
+                ['name' => 'Taça', 'description' => 'Sabor de escolha', 'price' => 12.00],
             ],
         ];
 
@@ -69,9 +132,22 @@ class MenuController extends Controller
             $groupedItems = collect();
         }
 
+        foreach ($defaultItems as $categoryKey => $items) {
+            if (! $groupedItems->has($categoryKey) || $groupedItems->get($categoryKey)->isEmpty()) {
+                $groupedItems->put($categoryKey, collect($items));
+            }
+        }
+
+        $extraBatataItem = MenuItem::query()
+            ->where('category', 'adicionais')
+            ->where('is_available', true)
+            ->orderBy('display_order')
+            ->first();
+
         return view('welcome', [
             'categories' => $categories,
             'groupedItems' => $groupedItems,
+            'extraBatataItem' => $extraBatataItem,
         ]);
     }
 }

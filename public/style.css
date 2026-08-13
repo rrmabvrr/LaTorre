@@ -662,10 +662,78 @@ a {
     margin-bottom: var(--space-md);
 }
 
+.pizza-sizes {
+    display: grid;
+    gap: 0.45rem;
+    margin: var(--space-md) 0;
+    padding: 0.75rem 0.85rem;
+    border-radius: var(--radius-md);
+    background: linear-gradient(135deg, rgba(31, 122, 63, 0.06), rgba(232, 184, 48, 0.08));
+    border: 1px solid rgba(31, 122, 63, 0.1);
+}
+
+.pizza-size-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.45rem 0.2rem;
+    border-bottom: 1px dashed rgba(61, 49, 40, 0.18);
+    cursor: pointer;
+    font-size: 0.8rem;
+    color: var(--brown);
+}
+
+.pizza-size-option:last-child {
+    border-bottom: 0;
+}
+
+.pizza-size-checkbox {
+    accent-color: var(--green-dark);
+    width: 1rem;
+    height: 1rem;
+    margin: 0;
+    flex-shrink: 0;
+}
+
+.pizza-size-name {
+    flex: 1;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.pizza-size-price {
+    font-weight: 700;
+    color: var(--green-dark);
+    white-space: nowrap;
+}
+
+.pizza-size-message {
+    min-height: 1.4rem;
+    margin-top: -0.15rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem 0.7rem;
+    border-radius: 0.65rem;
+    background: rgba(196, 65, 52, 0.09);
+    border: 1px solid rgba(196, 65, 52, 0.18);
+    color: var(--red);
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1.35;
+    display: none;
+}
+
+.pizza-size-message.visible {
+    display: block;
+}
+
 .card-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 0.75rem;
+    margin-top: auto;
 }
 
 .card-size {
@@ -677,6 +745,7 @@ a {
 .card-order {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 6px;
     background: linear-gradient(135deg, var(--green), var(--green-dark));
     color: var(--white);
@@ -686,6 +755,7 @@ a {
     font-weight: 600;
     transition: var(--transition-normal);
     box-shadow: var(--shadow-sm);
+    flex: 1;
 }
 
 .card-order:hover {
@@ -1238,6 +1308,35 @@ a {
 .comanda-empty span {
     font-size: 0.9rem;
     color: var(--gray-600);
+}
+
+.comanda-extra {
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    background: rgba(32, 143, 92, 0.08);
+    border: 1px solid rgba(32, 143, 92, 0.2);
+    border-radius: var(--radius-md);
+}
+
+.comanda-extra-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.92rem;
+    color: var(--brown);
+    cursor: pointer;
+}
+
+.comanda-extra-toggle input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--green);
+}
+
+.comanda-extra-toggle strong {
+    color: var(--green-dark);
+    font-weight: 800;
 }
 
 /* Items List */

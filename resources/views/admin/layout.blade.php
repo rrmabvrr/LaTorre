@@ -224,6 +224,10 @@
         .item-card-title {
             margin: 0;
             font-size: 16px;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
 
         .item-meta {
@@ -231,6 +235,23 @@
             display: grid;
             gap: 4px;
             font-size: 14px;
+        }
+
+        .texto-curto {
+            width: 250px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+        }
+
+        .sizes-preview,
+        .truncated-text {
+            display: block;
+            width: 250px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .desktop-only {

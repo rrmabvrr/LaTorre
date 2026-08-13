@@ -9,6 +9,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     let comandaItems = JSON.parse(localStorage.getItem('latorre_comanda') || '[]');
 
+    function normalizeComandaItems(items) {
+        return items.map(item => {
+            const isPizza = Boolean(item.isPizza) || / - (MÉDIA|GRANDE|FAMÍLIA|BIG)$/.test(String(item.name || ''));
+            const isExtra = Boolean(item.isExtra) || String(item.name || '') === (window.extraBatataConfig?.name || 'Adicional de batatas');
+
+            return {
+                ...item,
+                price: Number(item.price || 0),
+                qty: Number(item.qty || 1),
+                isPizza,
+                isExtra,
+            };
+        });
+    }
+
+    comandaItems = normalizeComandaItems(comandaItems);
+
     // ============================================
     // DOM Elements
     // ============================================
@@ -25,6 +42,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const sendBtn = document.getElementById('comanda-send');
     const clearBtn = document.getElementById('comanda-clear');
     const addButtons = document.querySelectorAll('.btn-add-comanda');
+    const extraToggle = document.getElementById('comanda-extra-batata');
+    const extraLabel = document.getElementById('comanda-extra-label');
+    const extraPrice = document.getElementById('comanda-extra-price');
+    const extraWrap = document.getElementById('comanda-extra');
+    const extraConfig = window.extraBatataConfig || { name: 'Adicional de batatas', price: 7.00 };
+
+    function getExtraBatataItem() {
+        return {
+            name: extraConfig.name || 'Adicional de batatas',
+            price: Number(extraConfig.price || 7.00),
+            qty: 1,
+            isPizza: false,
+            isExtra: true,
+        };
+    }
+
+    function syncExtraBatataState() {
+        if (!extraToggle) {
+            return;
+        }
+
+        const extraItem = getExtraBatataItem();
+        const hasPizza = comandaItems.some(item => item.isPizza || / - (MÉDIA|GRANDE|FAMÍLIA|BIG)$/.test(String(item.name || '')));
+        const extraIndex = comandaItems.findIndex(item => item.isExtra === true && item.name === extraItem.name);
+
+        if (!hasPizza) {
+            if (extraIndex >= 0) {
+                comandaItems.splice(extraIndex, 1);
+            }
+            extraToggle.checked = false;
+            return;
+        }
+
+        if (extraToggle.checked && extraIndex === -1) {
+            comandaItems.push({ ...extraItem, isExtra: true, isPizza: false, qty: 1 });
+        }
+
+        if (!extraToggle.checked && extraIndex >= 0) {
+            comandaItems.splice(extraIndex, 1);
+        }
+
+        extraToggle.checked = comandaItems.some(item => item.isExtra === true && item.name === extraItem.name);
+    }
 
     // ============================================
     // Panel Open / Close
@@ -57,19 +117,65 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     addButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            const name = btn.dataset.name;
-            const price = parseFloat(btn.dataset.price);
+            const card = btn.closest('.menu-card');
+            const sizeCheckboxes = card ? card.querySelectorAll('.pizza-size-checkbox') : [];
+            const messageBox = card ? card.querySelector('.pizza-size-message') : null;
+
+            let name = btn.dataset.name || btn.dataset.baseName || 'Item';
+            let price = parseFloat(btn.dataset.price || '0');
+
+            if (sizeCheckboxes.length > 0) {
+                const checkedSize = [...sizeCheckboxes].find(checkbox => checkbox.checked);
+
+                if (!checkedSize) {
+                    if (messageBox) {
+                        messageBox.textContent = 'Selecione um tamanho antes de adicionar.';
+                        messageBox.classList.add('visible');
+                    }
+                    return;
+                }
+
+                const sizeName = checkedSize.dataset.size;
+                const sizePrice = parseFloat(checkedSize.dataset.price || '0');
+                name = `${name} - ${sizeName}`;
+                price = sizePrice;
+                if (messageBox) {
+                    messageBox.textContent = '';
+                    messageBox.classList.remove('visible');
+                }
+            }
 
             const existing = comandaItems.find(item => item.name === name);
             if (existing) {
                 existing.qty += 1;
             } else {
-                comandaItems.push({ name, price, qty: 1 });
+                comandaItems.push({ name, price, qty: 1, isPizza: sizeCheckboxes.length > 0 });
             }
 
             saveAndRender();
             animateAddButton(btn);
             pulseToggle();
+        });
+    });
+
+    document.querySelectorAll('.pizza-size-checkbox').forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            const card = checkbox.closest('.menu-card');
+            if (!card) return;
+
+            const messageBox = card.querySelector('.pizza-size-message');
+            if (messageBox) {
+                messageBox.textContent = '';
+                messageBox.classList.remove('visible');
+            }
+
+            if (!checkbox.checked) return;
+
+            card.querySelectorAll('.pizza-size-checkbox').forEach(other => {
+                if (other !== checkbox) {
+                    other.checked = false;
+                }
+            });
         });
     });
 
@@ -118,7 +224,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     // Render Comanda
     // ============================================
+    if (extraToggle) {
+        extraToggle.addEventListener('change', () => {
+            syncExtraBatataState();
+            saveAndRender();
+        });
+    }
+
     function renderComanda() {
+        comandaItems = normalizeComandaItems(comandaItems);
+
+        if (extraToggle) {
+            const extraItem = getExtraBatataItem();
+
+            if (extraLabel) {
+                extraLabel.textContent = extraItem.name;
+            }
+
+            if (extraPrice) {
+                extraPrice.textContent = `R$ ${extraItem.price.toFixed(2).replace('.', ',')}`;
+            }
+
+            syncExtraBatataState();
+
+            if (extraWrap) {
+                extraWrap.style.display = comandaItems.some(item => item.isPizza || / - (MÉDIA|GRANDE|FAMÍLIA|BIG)$/.test(String(item.name || ''))) ? 'block' : 'none';
+            }
+        }
+
         // Badge
         const totalQty = comandaItems.reduce((sum, item) => sum + item.qty, 0);
         badge.textContent = totalQty;

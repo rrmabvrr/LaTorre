@@ -62,6 +62,13 @@
                 <p>Sua comanda está vazia</p>
                 <span>Adicione itens do cardápio</span>
             </div>
+            <div class="comanda-extra" id="comanda-extra" style="display: none;">
+                <label class="comanda-extra-toggle" for="comanda-extra-batata">
+                    <input type="checkbox" id="comanda-extra-batata">
+                    <span id="comanda-extra-label">Adicional de batatas</span>
+                    <strong id="comanda-extra-price">R$ 7,00</strong>
+                </label>
+            </div>
             <ul class="comanda-items" id="comanda-items"></ul>
         </div>
 
@@ -137,20 +144,79 @@
                 </div>
                 <div class="{{ $sectionClasses }}">
                     @forelse ($items as $item)
-                        <article class="menu-card {{ $category['cardClass'] }}" id="card-item-{{ $item->id }}">
+                        @php
+                            $itemName = is_object($item) ? $item->name : ($item['name'] ?? 'Item');
+                            $itemPrice = is_object($item) ? (float) $item->price : (float) ($item['price'] ?? 0);
+                            $itemDescription = is_object($item) ? $item->description : ($item['description'] ?? null);
+                            $itemId = is_object($item) ? $item->id : ($item['id'] ?? $loop->index);
+                            $rawPizzaSizes = in_array($categoryKey, ['tradicionais', 'especiais', 'nobres'], true)
+                                ? ((is_object($item) && property_exists($item, 'sizes') && is_array($item->sizes)) ? $item->sizes : ((is_array($item) && isset($item['sizes']) && is_array($item['sizes'])) ? $item['sizes'] : [
+                                    'MÉDIA' => 39.90,
+                                    'GRANDE' => 49.90,
+                                    'FAMÍLIA' => 69.90,
+                                    'BIG' => 89.90,
+                                ]))
+                                : null;
+                            $pizzaSizes = [];
+                            foreach (['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG'] as $sizeName) {
+                                if (isset($rawPizzaSizes[$sizeName])) {
+                                    $pizzaSizes[$sizeName] = (float) $rawPizzaSizes[$sizeName];
+                                }
+                            }
+                            $juiceOptions = in_array($categoryKey, ['sucos_naturais'], true)
+                                ? ((is_object($item) && property_exists($item, 'sizes') && is_array($item->sizes)) ? $item->sizes : ((is_array($item) && isset($item['sizes']) && is_array($item['sizes'])) ? $item['sizes'] : [
+                                    'COPO' => 12.00,
+                                    'JARRA' => 24.00,
+                                    'ADICIONAL DE LEITE' => 5.00,
+                                ]))
+                                : null;
+                        @endphp
+                        <article class="menu-card {{ $category['cardClass'] }}" id="card-item-{{ $itemId }}">
                             <div class="card-header">
-                                <h3 class="card-title">{{ $item->name }}</h3>
-                                <span class="card-price">R$ {{ number_format((float) $item->price, 2, ',', '.') }}</span>
+                                <h3 class="card-title">{{ $itemName }}</h3>
+                                @if (empty($pizzaSizes))
+                                    <span class="card-price">R$ {{ number_format($itemPrice, 2, ',', '.') }}</span>
+                                @endif
                             </div>
-                            @if ($item->description)
-                                <p class="card-desc">{{ $item->description }}</p>
+                            @if ($itemDescription)
+                                <p class="card-desc">{{ $itemDescription }}</p>
+                            @endif
+                            @if (!empty($pizzaSizes))
+                                <div class="pizza-sizes" aria-label="Tamanhos e preços da pizza {{ $itemName }}">
+                                    @foreach ($pizzaSizes as $sizeName => $sizePrice)
+                                        <label class="pizza-size-option">
+                                            <input type="checkbox" class="pizza-size-checkbox"
+                                                data-size="{{ $sizeName }}"
+                                                data-price="{{ number_format((float) $sizePrice, 2, '.', '') }}"
+                                                data-name="{{ $itemName }}">
+                                            <span class="pizza-size-name">{{ $sizeName }}</span>
+                                            <span class="pizza-size-price">R$ {{ number_format((float) $sizePrice, 2, ',', '.') }}</span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                                <div class="pizza-size-message" aria-live="polite"></div>
+                            @elseif (!empty($juiceOptions))
+                                <div class="pizza-sizes" aria-label="Opções e preços do suco {{ $itemName }}">
+                                    @foreach ($juiceOptions as $optionName => $optionPrice)
+                                        <label class="pizza-size-option">
+                                            <input type="checkbox" class="pizza-size-checkbox"
+                                                data-size="{{ $optionName }}"
+                                                data-price="{{ number_format((float) $optionPrice, 2, '.', '') }}"
+                                                data-name="{{ $itemName }}">
+                                            <span class="pizza-size-name">{{ $optionName }}</span>
+                                            <span class="pizza-size-price">R$ {{ number_format((float) $optionPrice, 2, ',', '.') }}</span>
+                                        </label>
+                                    @endforeach
+                                </div>
+                                <div class="pizza-size-message" aria-live="polite"></div>
                             @endif
                             <div class="card-footer">
-                                @if (in_array($categoryKey, ['tradicionais', 'especiais', 'premium', 'doces'], true))
-                                    <span class="card-size">🍕 Grande</span>
+                                @if (empty($pizzaSizes) && empty($juiceOptions))
+                                    <span class="card-size">{{ $categoryKey === 'bebidas' ? 'Refrescante' : '' }}</span>
                                 @endif
-                                <button type="button" class="card-order btn-add-comanda" data-name="{{ $item->name }}"
-                                    data-price="{{ number_format((float) $item->price, 2, '.', '') }}">Adicionar</button>
+                                <button type="button" class="card-order btn-add-comanda" data-name="{{ $itemName }}"
+                                    data-base-name="{{ $itemName }}"
+                                    data-price="{{ number_format($itemPrice, 2, '.', '') }}">Adicionar</button>
                             </div>
                         </article>
                     @empty
@@ -223,6 +289,12 @@
         </div>
     </footer>
 
+    <script>
+        window.extraBatataConfig = @json([
+            'name' => $extraBatataItem?->name ?? 'ADICIONAL DE BATATAS',
+            'price' => (float) ($extraBatataItem?->price ?? 7.00),
+        ]);
+    </script>
     <script src="{{ asset('script.js') }}"></script>
     <script src="{{ asset('comanda.js') }}"></script>
     <script>
