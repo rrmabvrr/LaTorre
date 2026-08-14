@@ -99,7 +99,7 @@
         <div class="hero-content">
             <div class="logo-container" id="logo-container">
                 <div class="pizza-icon">🍕</div>
-                <h1 class="logo-text">La Torre</h1>
+                <img src="{{ asset('img/Logo_LaTorre.svg') }}" alt="La Torre" class="logo-image">
                 <p class="logo-subtitle">Pizzaria e Sorveteria</p>
             </div>
             <div class="hero-info">
