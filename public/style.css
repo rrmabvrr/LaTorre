@@ -35,7 +35,7 @@
     /* Typography */
     --font-display: 'Quenda', 'Quenda Bold', Georgia, serif;
     --font-body: 'Quenda', 'Quenda Medium', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-script: 'Dancing Script', cursive;
+    --font-script: 'Quenda', 'Quenda Bold', Georgia, serif;
 
     /* Spacing */
     --space-xs: 0.25rem;
