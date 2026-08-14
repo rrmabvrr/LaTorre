@@ -664,7 +664,7 @@ a {
 
 .pizza-sizes {
     display: grid;
-    gap: 0.45rem;
+    gap: 0.35rem;
     margin: var(--space-md) 0;
     padding: 0.75rem 0.85rem;
     border-radius: var(--radius-md);
@@ -673,14 +673,16 @@ a {
 }
 
 .pizza-size-option {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1rem minmax(0, 1fr) auto;
     align-items: center;
-    justify-content: space-between;
-    gap: 0.75rem;
-    padding: 0.45rem 0.2rem;
+    column-gap: 0.55rem;
+    row-gap: 0.15rem;
+    width: 100%;
+    padding: 0.45rem 0.15rem;
     border-bottom: 1px dashed rgba(61, 49, 40, 0.18);
     cursor: pointer;
-    font-size: 0.8rem;
+    font-size: 0.84rem;
     color: var(--brown);
 }
 
@@ -697,9 +699,9 @@ a {
 }
 
 .pizza-size-name {
-    flex: 1;
+    min-width: 0;
     font-weight: 700;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
 }
 
@@ -707,6 +709,12 @@ a {
     font-weight: 700;
     color: var(--green-dark);
     white-space: nowrap;
+    text-align: right;
+}
+
+.pizza-size-checkbox:checked+.pizza-size-name,
+.pizza-size-checkbox:checked+.pizza-size-name+.pizza-size-price {
+    color: var(--green-dark);
 }
 
 .pizza-size-message {
@@ -1046,6 +1054,16 @@ a {
     .section-title {
         font-size: 1.6rem;
     }
+
+    .pizza-size-option {
+        grid-template-columns: 1rem minmax(0, 1fr);
+    }
+
+    .pizza-size-price {
+        grid-column: 2;
+        font-size: 0.9rem;
+        text-align: left;
+    }
 }
 
 /* ============================================
@@ -1144,14 +1162,29 @@ a {
 }
 
 @keyframes comanda-glow {
-    0%, 100% { box-shadow: 0 6px 24px rgba(196, 40, 45, 0.4); }
-    50% { box-shadow: 0 6px 32px rgba(196, 40, 45, 0.6), 0 0 0 10px rgba(196, 40, 45, 0.1); }
+
+    0%,
+    100% {
+        box-shadow: 0 6px 24px rgba(196, 40, 45, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 6px 32px rgba(196, 40, 45, 0.6), 0 0 0 10px rgba(196, 40, 45, 0.1);
+    }
 }
 
 @keyframes comanda-pulse-once {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
 }
 
 /* Badge */
@@ -1379,6 +1412,7 @@ a {
         opacity: 0;
         transform: translateX(30px);
     }
+
     to {
         opacity: 1;
         transform: translateX(0);
