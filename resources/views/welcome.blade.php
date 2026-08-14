@@ -113,10 +113,10 @@
                 </p>
                 <div class="hero-phones">
                     <a href="https://wa.me/5595991428625" class="phone-link">
-                        <span class="whatsapp-icon-small">📱</span> 99142-8625
+                        <span class="whatsapp-icon-small">📱</span> (95) 99142-8625
                     </a>
                     <a href="tel:991429922" class="phone-link">
-                        <span class="whatsapp-icon-small">📞</span> 99142-9922
+                        <span class="whatsapp-icon-small">📞</span> (95) 99142-9922
                     </a>
                 </div>
             </div>
@@ -274,7 +274,9 @@
     <footer class="footer" id="footer">
         <div class="footer-content">
             <div class="footer-brand">
-                <h2 class="footer-logo">La Torre</h2>
+                <h2 class="footer-logo">
+                    <img src="{{ asset('img/Logo_LaTorre.svg') }}" alt="La Torre" class="footer-logo-image">
+                </h2>
                 <p>Pizzaria e Sorveteria</p>
             </div>
             <div class="footer-contact">
