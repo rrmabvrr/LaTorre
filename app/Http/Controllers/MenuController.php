@@ -81,9 +81,9 @@ class MenuController extends Controller
         $defaultItems = [
             'tradicionais' => [
                 ['name' => 'Mussarela', 'description' => 'Molho de tomate, mussarela e orégano', 'sizes' => $pizzaSizes],
-                ['name' => 'Calabresa', 'description' => 'Calabresa, cebola e mussarela', 'sizes' => array_map(fn ($price) => $price + 5.00, $pizzaSizes)],
-                ['name' => 'Frango com Catupiry', 'description' => 'Frango desfiado e catupiry', 'sizes' => array_map(fn ($price) => $price + 7.50, $pizzaSizes)],
-                ['name' => 'Pepperoni', 'description' => 'Pepperoni artesanal e mussarela', 'sizes' => array_map(fn ($price) => $price + 8.00, $pizzaSizes)],
+                ['name' => 'Calabresa', 'description' => 'Calabresa, cebola e mussarela', 'sizes' => array_map(fn($price) => $price + 5.00, $pizzaSizes)],
+                ['name' => 'Frango com Catupiry', 'description' => 'Frango desfiado e catupiry', 'sizes' => array_map(fn($price) => $price + 7.50, $pizzaSizes)],
+                ['name' => 'Pepperoni', 'description' => 'Pepperoni artesanal e mussarela', 'sizes' => array_map(fn($price) => $price + 8.00, $pizzaSizes)],
             ],
             'especiais' => [
                 ['name' => 'Camarão', 'description' => 'Camarão com catupiry e cebolinha', 'sizes' => ['MÉDIA' => 44.90, 'GRANDE' => 54.90, 'FAMÍLIA' => 74.90, 'BIG' => 94.90]],
@@ -151,7 +151,7 @@ class MenuController extends Controller
             ->orderBy('display_order')
             ->first();
 
-        return view('welcome', [
+        return view('cardapio', [
             'categories' => $categories,
             'groupedItems' => $groupedItems,
             'extraBatataItem' => $extraBatataItem,

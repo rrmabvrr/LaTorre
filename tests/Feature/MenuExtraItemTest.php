@@ -26,7 +26,7 @@ class MenuExtraItemTest extends TestCase
 
     public function test_menu_exposes_extra_batata_config_for_comanda(): void
     {
-        $this->get(route('welcome'))
+        $this->get(route('cardapio'))
             ->assertOk()
             ->assertSee('Adicional de batatas')
             ->assertSee('window.extraBatataConfig');
@@ -63,7 +63,7 @@ class MenuExtraItemTest extends TestCase
 
     public function test_menu_has_six_suco_flavors_with_three_size_values(): void
     {
-        $this->get(route('welcome'))
+        $this->get(route('cardapio'))
             ->assertOk()
             ->assertSee('Laranja')
             ->assertSee('Morango')
@@ -75,7 +75,7 @@ class MenuExtraItemTest extends TestCase
 
     public function test_menu_has_six_tira_gosto_options(): void
     {
-        $this->get(route('welcome'))
+        $this->get(route('cardapio'))
             ->assertOk()
             ->assertSee('Porção de Batata Frita')
             ->assertSee('Porção de Calabresa')
@@ -87,7 +87,7 @@ class MenuExtraItemTest extends TestCase
 
     public function test_tira_gosto_items_show_visible_price_in_card_footer(): void
     {
-        $this->get(route('welcome'))
+        $this->get(route('cardapio'))
             ->assertOk()
             ->assertSee('R$ 18,90')
             ->assertSee('R$ 29,90');
@@ -144,7 +144,7 @@ class MenuExtraItemTest extends TestCase
             ],
         ]);
 
-        $this->get(route('welcome'))
+        $this->get(route('cardapio'))
             ->assertOk()
             ->assertSee('R$ 15,00')
             ->assertSee('R$ 28,00')

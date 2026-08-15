@@ -5,7 +5,7 @@ use App\Http\Controllers\Admin\MenuItemController;
 use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [MenuController::class, 'index'])->name('welcome');
+Route::get('/', [MenuController::class, 'index'])->name('cardapio');
 Route::get('/cardapio', [MenuController::class, 'index'])->name('menu.index');
 Route::redirect('/login', '/admin/login')->name('login');
 
