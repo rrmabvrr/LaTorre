@@ -298,8 +298,7 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
             'price' => (float) ($extraBatataItem?->price ?? 7.00),
         ]);
 </script>
-<script src="{{ asset('script.js') }}?v={{ filemtime(public_path('script.js')) }}"></script>
-<script src="{{ asset('comanda.js') }}?v={{ filemtime(public_path('comanda.js')) }}"></script>
+@vite(['resources/js/script.js', 'resources/js/comanda.js'])
 <script>
     document.addEventListener('DOMContentLoaded', function() {
             const button = document.getElementById('back-to-top');
