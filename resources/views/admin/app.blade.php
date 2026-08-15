@@ -16,7 +16,9 @@
             --border: #e5e0d8;
         }
 
-        * { box-sizing: border-box; }
+        * {
+            box-sizing: border-box;
+        }
 
         body {
             margin: 0;
@@ -95,7 +97,9 @@
             color: #fff;
         }
 
-        .btn-primary:hover { background: var(--accent-strong); }
+        .btn-primary:hover {
+            background: var(--accent-strong);
+        }
 
         .btn-success {
             background: #1f7a40;
@@ -141,7 +145,8 @@
             border-collapse: collapse;
         }
 
-        th, td {
+        th,
+        td {
             text-align: left;
             padding: 10px;
             border-bottom: 1px solid var(--border);
@@ -165,9 +170,13 @@
             gap: 6px;
         }
 
-        label { font-weight: 600; }
+        label {
+            font-weight: 600;
+        }
 
-        input, select, textarea {
+        input,
+        select,
+        textarea {
             width: 100%;
             border: 1px solid #d9d4cb;
             border-radius: 10px;
@@ -177,7 +186,9 @@
             background: #fff;
         }
 
-        .muted { color: var(--muted); }
+        .muted {
+            color: var(--muted);
+        }
 
         .row-actions {
             display: flex;
@@ -332,6 +343,33 @@
             background: #f2efe9;
         }
 
+        @media (max-width: 740px) {
+
+            .card,
+            .mobile-list,
+            .item-card,
+            .item-card-head,
+            .item-meta,
+            .texto-curto,
+            .sizes-preview,
+            .truncated-text,
+            .price-preview {
+                min-width: 0;
+                max-width: 100%;
+            }
+
+            .item-card-head>* {
+                min-width: 0;
+            }
+
+            .sizes-preview,
+            .truncated-text,
+            .price-preview,
+            .texto-curto {
+                overflow-wrap: anywhere;
+            }
+        }
+
         @media (min-width: 741px) {
             .container {
                 width: min(1100px, 92vw);
@@ -403,6 +441,7 @@
             }
         }
     </style>
+    @stack('head')
 </head>
 
 <body>
@@ -415,10 +454,10 @@
             <div class="actions">
                 <a class="btn" href="{{ route('menu.index') }}" target="_blank">Ver Cardápio</a>
                 @auth
-                    <form action="{{ route('admin.logout') }}" method="POST">
-                        @csrf
-                        <button class="btn" type="submit">Sair</button>
-                    </form>
+                <form action="{{ route('admin.logout') }}" method="POST">
+                    @csrf
+                    <button class="btn" type="submit">Sair</button>
+                </form>
                 @endauth
             </div>
         </div>
@@ -426,22 +465,24 @@
 
     <main class="container">
         @if (session('success'))
-            <div class="flash">{{ session('success') }}</div>
+        <div class="flash">{{ session('success') }}</div>
         @endif
 
         @if ($errors->any())
-            <div class="error-box">
-                <strong>Corrija os campos abaixo:</strong>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+        <div class="error-box">
+            <strong>Corrija os campos abaixo:</strong>
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
         @endif
 
         @yield('content')
     </main>
+
+    @stack('scripts')
 </body>
 
 </html>

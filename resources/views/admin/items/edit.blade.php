@@ -1,15 +1,15 @@
-@extends('admin.layout')
+@extends('admin.app')
 
 @section('title', 'Editar Item')
 
 @section('content')
-    <div class="card">
-        <h1>Editar item</h1>
-        <p class="muted">Atualize os dados do item selecionado.</p>
+<div class="card">
+    <h1>Editar item</h1>
+    <p class="muted">Atualize os dados do item selecionado.</p>
 
-        <form action="{{ route('admin.items.update', $item) }}" method="POST">
-            @method('PUT')
-            @include('admin.items._form')
-        </form>
-    </div>
+    <form action="{{ route('admin.items.update', $item) }}" method="POST">
+        @method('PUT')
+        @include('admin.items._form')
+    </form>
+</div>
 @endsection

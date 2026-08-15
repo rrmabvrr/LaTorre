@@ -12,19 +12,46 @@ use Illuminate\View\View;
 class MenuItemController extends Controller
 {
     /**
+     * @param Request $request
      * @return View
      */
-    public function index(): View
+    public function index(Request $request): View
     {
-        $items = MenuItem::query()
+        $categories = $this->categories();
+        $search = trim((string) $request->query('search', ''));
+        $category = (string) $request->query('category', '');
+
+        if (! array_key_exists($category, $categories)) {
+            $category = '';
+        }
+
+        $itemsQuery = MenuItem::query();
+
+        if ($search !== '') {
+            $itemsQuery->where(function ($query) use ($search): void {
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        if ($category !== '') {
+            $itemsQuery->where('category', $category);
+        }
+
+        $items = $itemsQuery
             ->orderBy('category')
             ->orderBy('display_order')
             ->orderBy('name')
-            ->paginate(20);
+            ->paginate(20)
+            ->withQueryString();
 
         return view('admin.items.index', [
             'items' => $items,
-            'categories' => $this->categories(),
+            'categories' => $categories,
+            'filters' => [
+                'search' => $search,
+                'category' => $category,
+            ],
         ]);
     }
 
