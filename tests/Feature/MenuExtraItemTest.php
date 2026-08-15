@@ -85,6 +85,14 @@ class MenuExtraItemTest extends TestCase
             ->assertSee('Porção Mista');
     }
 
+    public function test_tira_gosto_items_show_visible_price_in_card_footer(): void
+    {
+        $this->get(route('welcome'))
+            ->assertOk()
+            ->assertSee('R$ 18,90')
+            ->assertSee('R$ 29,90');
+    }
+
     public function test_database_seeder_realigns_tira_gosto_admin_items(): void
     {
         MenuItem::query()->create([

@@ -531,7 +531,7 @@ a {
 }
 
 .bebidas-grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 }
 
 .menu-card {
@@ -1010,7 +1010,7 @@ a {
     }
 
     .bebidas-grid {
-        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-template-columns: 1fr;
     }
 
     .nav-pill {
@@ -1074,13 +1074,18 @@ a {
     }
 
     .pizza-size-option {
-        grid-template-columns: 1rem minmax(0, 1fr);
+        grid-template-columns: 1rem minmax(0, 1fr) auto;
+        column-gap: 0.45rem;
     }
 
     .pizza-size-price {
-        grid-column: 2;
+        grid-column: auto;
         font-size: 0.9rem;
-        text-align: left;
+        text-align: right;
+    }
+
+    .pizza-size-name {
+        white-space: nowrap;
     }
 }
 

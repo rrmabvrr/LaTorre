@@ -212,47 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ============================================
-    // Counter Animation for Prices
-    // ============================================
-    const animatePrice = (element) => {
-        const text = element.textContent;
-        const match = text.match(/R\$\s*([\d,]+)/);
-        if (!match) return;
-
-        const targetValue = parseFloat(match[1].replace(',', '.'));
-        const duration = 800;
-        const start = performance.now();
-
-        const animate = (currentTime) => {
-            const elapsed = currentTime - start;
-            const progress = Math.min(elapsed / duration, 1);
-            const eased = 1 - Math.pow(1 - progress, 3);
-            const currentValue = (targetValue * eased).toFixed(2).replace('.', ',');
-            element.textContent = `R$ ${currentValue}`;
-
-            if (progress < 1) {
-                requestAnimationFrame(animate);
-            }
-        };
-
-        requestAnimationFrame(animate);
-    };
-
-    // Animate prices when they come into view
-    const priceObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                animatePrice(entry.target);
-                priceObserver.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.5 });
-
-    document.querySelectorAll('.card-price').forEach(price => {
-        priceObserver.observe(price);
-    });
-
-    // ============================================
     // Scroll to top when clicking logo
     // ============================================
     const scrollIndicator = document.querySelector('.hero-scroll-indicator');
