@@ -1,0 +1,24 @@
+{
+  "resources/css/admin.css": {
+    "file": "assets/admin-DfdSfeBG.css",
+    "src": "resources/css/admin.css",
+    "isEntry": true
+  },
+  "resources/css/style.css": {
+    "file": "assets/style-CKV_O5X8.css",
+    "src": "resources/css/style.css",
+    "isEntry": true
+  },
+  "resources/js/comanda.js": {
+    "file": "assets/comanda-Bt6Xmlif.js",
+    "name": "comanda",
+    "src": "resources/js/comanda.js",
+    "isEntry": true
+  },
+  "resources/js/script.js": {
+    "file": "assets/script-BJiby_Kw.js",
+    "name": "script",
+    "src": "resources/js/script.js",
+    "isEntry": true
+  }
+}
