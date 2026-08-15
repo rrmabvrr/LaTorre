@@ -60,8 +60,8 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
         <div class="comanda-extra" id="comanda-extra" style="display: none;">
             <label class="comanda-extra-toggle" for="comanda-extra-batata">
                 <input type="checkbox" id="comanda-extra-batata">
-                <span id="comanda-extra-label">Adicional de batatas</span>
-                <strong id="comanda-extra-price">R$ 7,00</strong>
+                <span id="comanda-extra-label">ADICIONAL DE BATATAS</span>
+                <strong id="comanda-extra-price">R$ 10,00</strong>
             </label>
         </div>
         <ul class="comanda-items" id="comanda-items"></ul>
@@ -151,10 +151,10 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
             : ((is_array($item) && isset($item['sizes'])) ? $item['sizes'] : null);
             $rawPizzaSizes = in_array($categoryKey, ['tradicionais', 'especiais', 'nobres'], true)
             ? ((is_array($itemSizes) && ! empty($itemSizes)) ? $itemSizes : [
-            'MÉDIA' => 39.90,
-            'GRANDE' => 49.90,
-            'FAMÍLIA' => 69.90,
-            'BIG' => 89.90,
+            'MÉDIA' => 40.00,
+            'GRANDE' => 50.00,
+            'FAMÍLIA' => 60.00,
+            'BIG' => 75.00,
             ])
             : null;
             $pizzaSizes = [];

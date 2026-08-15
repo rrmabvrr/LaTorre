@@ -1,7 +1,7 @@
 @php
 $pizzaCategories = ['tradicionais', 'especiais', 'nobres'];
 $sizeCategories = ['tradicionais', 'especiais', 'nobres', 'sucos_naturais'];
-$selectedCategory = old('category', $item->category ?? null);
+$selectedCategory = old('category', $item->category ?? array_key_first($categories));
 $sizeKeys = in_array($selectedCategory, $pizzaCategories, true)
 ? ['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG']
 : (in_array($selectedCategory, ['sucos_naturais'], true)
@@ -82,12 +82,76 @@ $sizes = old('sizes', $item->sizes ?? array_fill_keys($sizeKeys, null));
             const priceField = document.getElementById('priceField');
             const sizeValuesField = document.getElementById('sizeValuesField');
             const priceInput = document.getElementById('price');
+            const sizeValuesGrid = sizeValuesField ? sizeValuesField.querySelector('.grid') : null;
 
             if (!categorySelect) {
                 return;
             }
 
             const sizeCategories = ['tradicionais', 'especiais', 'nobres', 'sucos_naturais'];
+            const pizzaCategories = ['tradicionais', 'especiais', 'nobres'];
+            const categorySizeMap = {
+                tradicionais: ['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG'],
+                especiais: ['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG'],
+                nobres: ['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG'],
+                sucos_naturais: ['COPO', 'JARRA', 'ADICIONAL DE LEITE']
+            };
+
+            const buildSizeInputId = (sizeLabel) => {
+                return `sizes_${sizeLabel}`
+                    .normalize('NFD')
+                    .replace(/[\u0300-\u036f]/g, '')
+                    .replace(/[^a-zA-Z0-9]+/g, '_');
+            };
+
+            const renderSizeInputs = () => {
+                if (!sizeValuesGrid) {
+                    return;
+                }
+
+                const sizes = categorySizeMap[categorySelect.value] || [];
+                const currentValues = {};
+
+                sizeValuesGrid.querySelectorAll('input[name^="sizes["]').forEach((input) => {
+                    currentValues[input.name] = input.value;
+                });
+
+                sizeValuesGrid.innerHTML = '';
+
+                sizes.forEach((size) => {
+                    const field = document.createElement('div');
+                    field.className = 'field';
+                    field.style.margin = '0';
+
+                    const label = document.createElement('label');
+                    label.htmlFor = buildSizeInputId(size);
+                    label.textContent = size;
+
+                    const input = document.createElement('input');
+                    input.id = buildSizeInputId(size);
+                    input.name = `sizes[${size}]`;
+                    input.type = 'number';
+                    input.min = '0';
+                    input.step = '0.01';
+                    input.placeholder = '0,00';
+
+                    const persistedValue = currentValues[input.name];
+                    if (typeof persistedValue !== 'undefined') {
+                        input.value = persistedValue;
+                    }
+
+                    field.appendChild(label);
+                    field.appendChild(input);
+                    sizeValuesGrid.appendChild(field);
+                });
+
+                const sizeValuesLabel = sizeValuesField.querySelector('label');
+                if (sizeValuesLabel) {
+                    sizeValuesLabel.textContent = pizzaCategories.includes(categorySelect.value)
+                        ? 'Tamanhos e valores da pizza'
+                        : 'Opções e valores do suco natural';
+                }
+            };
 
             const toggleFields = () => {
                 const requiresSizeValues = sizeCategories.includes(categorySelect.value);
@@ -106,6 +170,10 @@ $sizes = old('sizes', $item->sizes ?? array_fill_keys($sizeKeys, null));
 
                 if (priceInput && !requiresSizeValues) {
                     priceInput.setAttribute('required', 'required');
+                }
+
+                if (requiresSizeValues) {
+                    renderSizeInputs();
                 }
             };
 
