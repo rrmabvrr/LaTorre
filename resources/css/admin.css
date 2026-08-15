@@ -431,4 +431,12 @@ textarea {
     .table-wrap {
         overflow-x: auto;
     }
+
+    table td:first-child {
+        max-width: 340px;
+    }
+
+    table td:first-child .texto-curto {
+        max-width: 320px;
+    }
 }
