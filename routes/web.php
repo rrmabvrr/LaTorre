@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\MenuItemController;
+use App\Http\Controllers\Admin\PizzaCategoryPriceController;
 use App\Http\Controllers\MenuController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,8 @@ Route::prefix('admin')->name('admin.')->group(function (): void {
 
     Route::middleware('auth')->group(function (): void {
         Route::redirect('/', '/admin/items')->name('home');
+        Route::get('/precos-pizzas', [PizzaCategoryPriceController::class, 'index'])->name('pizza-prices.index');
+        Route::post('/precos-pizzas/{category}', [PizzaCategoryPriceController::class, 'update'])->name('pizza-prices.update');
         Route::resource('items', MenuItemController::class)->except(['show']);
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     });

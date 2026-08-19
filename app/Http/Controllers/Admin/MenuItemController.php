@@ -56,12 +56,30 @@ class MenuItemController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return View
      */
-    public function create(): View
+    public function create(Request $request): View
     {
+        $item = new MenuItem();
+        $selectedCat = (string) $request->query('category', 'tradicionais');
+        if (array_key_exists($selectedCat, $this->categories())) {
+            $item->category = $selectedCat;
+        }
+
+        if (in_array($item->category, ['tradicionais', 'especiais', 'nobres'], true)) {
+            $sample = MenuItem::query()
+                ->where('category', $item->category)
+                ->whereNotNull('sizes')
+                ->first();
+
+            if ($sample && ! empty($sample->sizes)) {
+                $item->sizes = $sample->sizes;
+            }
+        }
+
         return view('admin.items.create', [
-            'item' => new MenuItem(),
+            'item' => $item,
             'categories' => $this->categories(),
         ]);
     }
@@ -197,6 +215,17 @@ class MenuItemController extends Controller
             foreach ($sizeKeys as $size) {
                 if (isset($data['sizes'][$size]) && (float) $data['sizes'][$size] > 0) {
                     $orderedSizes[$size] = (float) $data['sizes'][$size];
+                }
+            }
+
+            if (in_array($data['category'], $pizzaCategories, true) && empty($orderedSizes)) {
+                $sample = MenuItem::query()
+                    ->where('category', $data['category'])
+                    ->whereNotNull('sizes')
+                    ->first();
+
+                if ($sample && ! empty($sample->sizes) && is_array($sample->sizes)) {
+                    $orderedSizes = $sample->sizes;
                 }
             }
 

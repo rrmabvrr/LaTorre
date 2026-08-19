@@ -8,7 +8,10 @@
         <h1 style="margin:0;">Itens do cardápio</h1>
         <p class="muted" style="margin:6px 0 0;">Adicione, edite ou remova itens que aparecem no site.</p>
     </div>
-    <a class="btn btn-success" href="{{ route('admin.items.create') }}">Novo item</a>
+    <div class="actions-inline" style="flex-direction: row; gap: 8px; flex-wrap: wrap;">
+        <a class="btn" href="{{ route('admin.pizza-prices.index') }}">Preços por Categoria</a>
+        <a class="btn btn-success" href="{{ route('admin.items.create') }}">Novo item</a>
+    </div>
 </div>
 
 <div class="card search-card" style="margin-bottom: 12px;">

@@ -17,6 +17,10 @@
                 <span>Admin</span>
             </a>
             <div class="actions">
+                @auth
+                <a class="btn" href="{{ route('admin.items.index') }}">Itens</a>
+                <a class="btn" href="{{ route('admin.pizza-prices.index') }}">Preços das Pizzas</a>
+                @endauth
                 <a class="btn" href="{{ route('menu.index') }}" target="_blank">Ver Cardápio</a>
                 @auth
                 <form action="{{ route('admin.logout') }}" method="POST">

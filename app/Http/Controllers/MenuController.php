@@ -71,31 +71,42 @@ class MenuController extends Controller
             ],
         ];
 
-        $pizzaSizes = [
-            'MÉDIA' => 39.90,
-            'GRANDE' => 49.90,
-            'FAMÍLIA' => 69.90,
-            'BIG' => 89.90,
-        ];
+        $pizzaCategories = ['tradicionais', 'especiais', 'nobres'];
+        $categoryPizzaSizes = [];
+
+        foreach ($pizzaCategories as $cat) {
+            try {
+                $sample = MenuItem::query()
+                    ->where('category', $cat)
+                    ->whereNotNull('sizes')
+                    ->first();
+
+                if ($sample && ! empty($sample->sizes) && is_array($sample->sizes)) {
+                    $categoryPizzaSizes[$cat] = $sample->sizes;
+                }
+            } catch (\Throwable) {
+                // Ignore DB connection errors if any
+            }
+        }
 
         $defaultItems = [
             'tradicionais' => [
-                ['name' => 'Mussarela', 'description' => 'Molho de tomate, mussarela e orégano', 'sizes' => $pizzaSizes],
-                ['name' => 'Calabresa', 'description' => 'Calabresa, cebola e mussarela', 'sizes' => array_map(fn($price) => $price + 5.00, $pizzaSizes)],
-                ['name' => 'Frango com Catupiry', 'description' => 'Frango desfiado e catupiry', 'sizes' => array_map(fn($price) => $price + 7.50, $pizzaSizes)],
-                ['name' => 'Pepperoni', 'description' => 'Pepperoni artesanal e mussarela', 'sizes' => array_map(fn($price) => $price + 8.00, $pizzaSizes)],
+                ['name' => 'Mussarela', 'description' => 'Molho de tomate, mussarela e orégano', 'sizes' => $categoryPizzaSizes['tradicionais'] ?? null],
+                ['name' => 'Calabresa', 'description' => 'Calabresa, cebola e mussarela', 'sizes' => $categoryPizzaSizes['tradicionais'] ?? null],
+                ['name' => 'Frango com Catupiry', 'description' => 'Frango desfiado e catupiry', 'sizes' => $categoryPizzaSizes['tradicionais'] ?? null],
+                ['name' => 'Pepperoni', 'description' => 'Pepperoni artesanal e mussarela', 'sizes' => $categoryPizzaSizes['tradicionais'] ?? null],
             ],
             'especiais' => [
-                ['name' => 'Camarão', 'description' => 'Camarão com catupiry e cebolinha', 'sizes' => ['MÉDIA' => 44.90, 'GRANDE' => 54.90, 'FAMÍLIA' => 74.90, 'BIG' => 94.90]],
-                ['name' => '4 Queijos', 'description' => 'Muçarela, catupiry, parmesão e gorgonzola', 'sizes' => ['MÉDIA' => 46.90, 'GRANDE' => 56.90, 'FAMÍLIA' => 76.90, 'BIG' => 96.90]],
-                ['name' => 'Portuguesa', 'description' => 'Presunto, cebola, ovo e azeitona', 'sizes' => ['MÉDIA' => 45.90, 'GRANDE' => 55.90, 'FAMÍLIA' => 75.90, 'BIG' => 95.90]],
-                ['name' => 'Brócolis com Bacon', 'description' => 'Brócolis, bacon e queijo', 'sizes' => ['MÉDIA' => 47.90, 'GRANDE' => 57.90, 'FAMÍLIA' => 77.90, 'BIG' => 97.90]],
+                ['name' => 'Camarão', 'description' => 'Camarão com catupiry e cebolinha', 'sizes' => $categoryPizzaSizes['especiais'] ?? null],
+                ['name' => '4 Queijos', 'description' => 'Muçarela, catupiry, parmesão e gorgonzola', 'sizes' => $categoryPizzaSizes['especiais'] ?? null],
+                ['name' => 'Portuguesa', 'description' => 'Presunto, cebola, ovo e azeitona', 'sizes' => $categoryPizzaSizes['especiais'] ?? null],
+                ['name' => 'Brócolis com Bacon', 'description' => 'Brócolis, bacon e queijo', 'sizes' => $categoryPizzaSizes['especiais'] ?? null],
             ],
             'nobres' => [
-                ['name' => 'Trufada', 'description' => 'Molho trufado e queijo premium', 'sizes' => ['MÉDIA' => 49.90, 'GRANDE' => 59.90, 'FAMÍLIA' => 79.90, 'BIG' => 99.90]],
-                ['name' => 'Alho e Óleo', 'description' => 'Alho, óleo e parmesão', 'sizes' => ['MÉDIA' => 48.90, 'GRANDE' => 58.90, 'FAMÍLIA' => 78.90, 'BIG' => 98.90]],
-                ['name' => 'Mignon com Gorgonzola', 'description' => 'Mignon, gorgonzola e rúcula', 'sizes' => ['MÉDIA' => 52.90, 'GRANDE' => 62.90, 'FAMÍLIA' => 84.90, 'BIG' => 104.90]],
-                ['name' => 'Salmão', 'description' => 'Salmão, cream cheese e cebola roxa', 'sizes' => ['MÉDIA' => 54.90, 'GRANDE' => 64.90, 'FAMÍLIA' => 86.90, 'BIG' => 106.90]],
+                ['name' => 'Trufada', 'description' => 'Molho trufado e queijo premium', 'sizes' => $categoryPizzaSizes['nobres'] ?? null],
+                ['name' => 'Alho e Óleo', 'description' => 'Alho, óleo e parmesão', 'sizes' => $categoryPizzaSizes['nobres'] ?? null],
+                ['name' => 'Mignon com Gorgonzola', 'description' => 'Mignon, gorgonzola e rúcula', 'sizes' => $categoryPizzaSizes['nobres'] ?? null],
+                ['name' => 'Salmão', 'description' => 'Salmão, cream cheese e cebola roxa', 'sizes' => $categoryPizzaSizes['nobres'] ?? null],
             ],
             'sucos_naturais' => [
                 ['name' => 'Laranja', 'description' => 'Suco natural de laranja', 'sizes' => ['COPO' => 12.00, 'JARRA' => 24.00, 'ADICIONAL DE LEITE' => 5.00]],
@@ -139,6 +150,17 @@ class MenuController extends Controller
             $groupedItems = collect();
         }
 
+        foreach ($pizzaCategories as $cat) {
+            if (isset($categoryPizzaSizes[$cat]) && $groupedItems->has($cat)) {
+                foreach ($groupedItems->get($cat) as $item) {
+                    if (is_object($item)) {
+                        $item->sizes = $categoryPizzaSizes[$cat];
+                        $item->price = $categoryPizzaSizes[$cat]['MÉDIA'] ?? $item->price;
+                    }
+                }
+            }
+        }
+
         foreach ($defaultItems as $categoryKey => $items) {
             if (! $groupedItems->has($categoryKey) || $groupedItems->get($categoryKey)->isEmpty()) {
                 $groupedItems->put($categoryKey, collect($items));
@@ -154,6 +176,7 @@ class MenuController extends Controller
         return view('cardapio', [
             'categories' => $categories,
             'groupedItems' => $groupedItems,
+            'categoryPizzaSizes' => $categoryPizzaSizes,
             'extraBatataItem' => $extraBatataItem,
         ]);
     }

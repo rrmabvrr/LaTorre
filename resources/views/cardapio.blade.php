@@ -150,18 +150,15 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
             ? ($item->sizes ?? null)
             : ((is_array($item) && isset($item['sizes'])) ? $item['sizes'] : null);
             $rawPizzaSizes = in_array($categoryKey, ['tradicionais', 'especiais', 'nobres'], true)
-            ? ((is_array($itemSizes) && ! empty($itemSizes)) ? $itemSizes : [
-            'MÉDIA' => 40.00,
-            'GRANDE' => 50.00,
-            'FAMÍLIA' => 60.00,
-            'BIG' => 75.00,
-            ])
-            : null;
+                ? ((is_array($itemSizes) && ! empty($itemSizes)) ? $itemSizes : ($categoryPizzaSizes[$categoryKey] ?? null))
+                : null;
             $pizzaSizes = [];
-            foreach (['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG'] as $sizeName) {
-            if (isset($rawPizzaSizes[$sizeName])) {
-            $pizzaSizes[$sizeName] = (float) $rawPizzaSizes[$sizeName];
-            }
+            if (! empty($rawPizzaSizes)) {
+                foreach (['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG'] as $sizeName) {
+                    if (isset($rawPizzaSizes[$sizeName])) {
+                        $pizzaSizes[$sizeName] = (float) $rawPizzaSizes[$sizeName];
+                    }
+                }
             }
             $juiceOptions = in_array($categoryKey, ['sucos_naturais'], true)
             ? ((is_array($itemSizes) && ! empty($itemSizes)) ? $itemSizes : [
