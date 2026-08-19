@@ -11,15 +11,15 @@
     <a class="btn btn-success" href="{{ route('admin.items.create') }}">Novo item</a>
 </div>
 
-<div class="card" style="margin-bottom: 12px;">
-    <form method="GET" action="{{ route('admin.items.index') }}" class="grid" style="gap: 10px;">
-        <div class="field">
+<div class="card search-card" style="margin-bottom: 12px;">
+    <form method="GET" action="{{ route('admin.items.index') }}" class="search-form">
+        <div class="field search-field-main">
             <label for="search">Pesquisar</label>
             <input type="text" id="search" name="search" value="{{ $filters['search'] ?? '' }}"
                 placeholder="Nome ou descrição do item">
         </div>
 
-        <div class="field">
+        <div class="field search-field-category">
             <label for="category">Categoria</label>
             <select id="category" name="category">
                 <option value="">Todas as categorias</option>
@@ -31,9 +31,11 @@
             </select>
         </div>
 
-        <div class="actions-inline">
+        <div class="actions-inline search-actions">
             <button type="submit" class="btn btn-primary">Pesquisar</button>
-            <a class="btn" href="{{ route('admin.items.index') }}">Limpar</a>
+            @if (!empty($filters['search']) || !empty($filters['category']))
+                <a class="btn" href="{{ route('admin.items.index') }}">Limpar</a>
+            @endif
         </div>
     </form>
 </div>

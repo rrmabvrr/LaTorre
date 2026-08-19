@@ -60,7 +60,7 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
         <div class="comanda-extra" id="comanda-extra" style="display: none;">
             <label class="comanda-extra-toggle" for="comanda-extra-batata">
                 <input type="checkbox" id="comanda-extra-batata">
-                <span id="comanda-extra-label">ADICIONAL DE BATATAS</span>
+                <span id="comanda-extra-label">Adicional de batatas</span>
                 <strong id="comanda-extra-price">R$ 10,00</strong>
             </label>
         </div>

@@ -46,6 +46,11 @@ class MenuItemIndexFilterTest extends TestCase
         ]);
 
         $this->actingAs($user)
+            ->get(route('admin.items.index'))
+            ->assertOk()
+            ->assertDontSee('Limpar');
+
+        $this->actingAs($user)
             ->get(route('admin.items.index', [
                 'search' => 'Laranja',
                 'category' => 'sucos_naturais',
@@ -53,6 +58,7 @@ class MenuItemIndexFilterTest extends TestCase
             ->assertOk()
             ->assertSee('Suco Laranja Especial')
             ->assertDontSee('Calabresa Picante')
-            ->assertDontSee('Suco de Morango');
+            ->assertDontSee('Suco de Morango')
+            ->assertSee('Limpar');
     }
 }

@@ -82,6 +82,7 @@ body {
     background: #efefef;
     color: var(--text);
     width: 100%;
+    min-height: 42px;
 }
 
 .btn-primary {
@@ -176,6 +177,26 @@ textarea {
     font-size: 15px;
     font-family: inherit;
     background: #fff;
+    min-height: 42px;
+}
+
+textarea {
+    min-height: auto;
+}
+
+.search-form {
+    display: grid;
+    gap: 10px;
+}
+
+.search-actions {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+}
+
+.search-actions .btn {
+    flex: 1;
 }
 
 .muted {
@@ -430,6 +451,37 @@ textarea {
 
     .table-wrap {
         overflow-x: auto;
+    }
+
+    .search-form {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        gap: 12px;
+    }
+
+    .search-field-main {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .search-field-category {
+        flex: 0 0 240px;
+    }
+
+    .search-actions {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+        flex-shrink: 0;
+    }
+
+    .search-actions .btn {
+        flex: none;
+        width: auto;
+        white-space: nowrap;
+        padding: 10px 18px;
     }
 
     table td:first-child {
