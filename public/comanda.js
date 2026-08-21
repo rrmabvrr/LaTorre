@@ -11,8 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function normalizeComandaItems(items) {
         return items.map(item => {
-            const isPizza = Boolean(item.isPizza) || / - (MÉDIA|GRANDE|FAMÍLIA|BIG)$/.test(String(item.name || ''));
-            const isExtra = Boolean(item.isExtra) || String(item.name || '') === (window.extraBatataConfig?.name || 'ADICIONAL DE BATATAS');
+            const itemName = String(item.name || '');
+            const isPizza = Boolean(item.isPizza) || / - (MÉDIA|GRANDE|FAMÍLIA|BIG)$/.test(itemName);
+            const isJuiceExtra = itemName.trim().toUpperCase() === 'ADICIONAL DE LEITE';
+            const isExtra = Boolean(item.isExtra) || itemName === (window.extraBatataConfig?.name || 'ADICIONAL DE BATATAS') || isJuiceExtra;
 
             return {
                 ...item,
@@ -137,6 +139,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const sizeName = checkedSize.dataset.size;
                 const sizePrice = parseFloat(checkedSize.dataset.price || '0');
+
+                if (sizeName && sizeName.toUpperCase() === 'ADICIONAL DE LEITE') {
+                    const juiceExtraName = 'ADICIONAL DE LEITE';
+                    const existingExtra = comandaItems.find(item => String(item.name || '').trim().toUpperCase() === juiceExtraName);
+
+                    if (existingExtra) {
+                        existingExtra.qty += 1;
+                    } else {
+                        comandaItems.push({
+                            name: juiceExtraName,
+                            price: sizePrice,
+                            qty: 1,
+                            isPizza: false,
+                            isExtra: true,
+                        });
+                    }
+
+                    if (messageBox) {
+                        messageBox.textContent = '';
+                        messageBox.classList.remove('visible');
+                    }
+
+                    saveAndRender();
+                    animateAddButton(btn);
+                    pulseToggle();
+                    return;
+                }
+
                 name = `${name} - ${sizeName}`;
                 price = sizePrice;
                 if (messageBox) {
@@ -149,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (existing) {
                 existing.qty += 1;
             } else {
-                comandaItems.push({ name, price, qty: 1, isPizza: sizeCheckboxes.length > 0 });
+                comandaItems.push({ name, price, qty: 1, isPizza: sizeCheckboxes.length > 0, isExtra: false });
             }
 
             saveAndRender();

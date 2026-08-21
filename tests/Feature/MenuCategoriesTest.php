@@ -15,6 +15,7 @@ class MenuCategoriesTest extends TestCase
         $response->assertSee('ESPECIAIS');
         $response->assertSee('NOBRES');
         $response->assertSee('SUCOS NATURAIS');
+        $response->assertSee('#sucos_naturais');
         $response->assertSee('TIRA GOSTO');
         $response->assertSee('BEBIDAS');
         $response->assertSee('CERVEJAS');
