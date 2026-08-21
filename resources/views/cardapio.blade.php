@@ -60,7 +60,7 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
         <div class="comanda-extra" id="comanda-extra" style="display: none;">
             <label class="comanda-extra-toggle" for="comanda-extra-batata">
                 <input type="checkbox" id="comanda-extra-batata">
-                <span id="comanda-extra-label">Adicional de batatas</span>
+                <span id="comanda-extra-label">ADICIONAL DE BATATAS</span>
                 <strong id="comanda-extra-price">R$ 10,00</strong>
             </label>
         </div>
@@ -150,15 +150,15 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
             ? ($item->sizes ?? null)
             : ((is_array($item) && isset($item['sizes'])) ? $item['sizes'] : null);
             $rawPizzaSizes = in_array($categoryKey, ['tradicionais', 'especiais', 'nobres'], true)
-                ? ((is_array($itemSizes) && ! empty($itemSizes)) ? $itemSizes : ($categoryPizzaSizes[$categoryKey] ?? null))
-                : null;
+            ? ((is_array($itemSizes) && ! empty($itemSizes)) ? $itemSizes : ($categoryPizzaSizes[$categoryKey] ?? null))
+            : null;
             $pizzaSizes = [];
             if (! empty($rawPizzaSizes)) {
-                foreach (['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG'] as $sizeName) {
-                    if (isset($rawPizzaSizes[$sizeName])) {
-                        $pizzaSizes[$sizeName] = (float) $rawPizzaSizes[$sizeName];
-                    }
-                }
+            foreach (['MÉDIA', 'GRANDE', 'FAMÍLIA', 'BIG'] as $sizeName) {
+            if (isset($rawPizzaSizes[$sizeName])) {
+            $pizzaSizes[$sizeName] = (float) $rawPizzaSizes[$sizeName];
+            }
+            }
             }
             $juiceOptions = in_array($categoryKey, ['sucos_naturais'], true)
             ? ((is_array($itemSizes) && ! empty($itemSizes)) ? $itemSizes : [
@@ -176,31 +176,55 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
                 <p class="card-desc">{{ $itemDescription }}</p>
                 @endif
                 @if (!empty($pizzaSizes))
-                <div class="pizza-sizes" aria-label="Tamanhos e preços da pizza {{ $itemName }}">
-                    @foreach ($pizzaSizes as $sizeName => $sizePrice)
-                    <label class="pizza-size-option">
-                        <input type="checkbox" class="pizza-size-checkbox" data-size="{{ $sizeName }}"
-                            data-price="{{ number_format((float) $sizePrice, 2, '.', '') }}"
-                            data-name="{{ $itemName }}">
-                        <span class="pizza-size-name">{{ $sizeName }}</span>
-                        <span class="pizza-size-price">R$ {{ number_format((float) $sizePrice, 2, ',', '.')
-                            }}</span>
-                    </label>
-                    @endforeach
+                <div class="pizza-collapse-wrapper">
+                    <button type="button" class="pizza-collapse-toggle" aria-expanded="false"
+                        aria-controls="pizza-sizes-{{ $itemId }}">
+                        <span class="pizza-collapse-toggle-text">Ver tamanhos e preços</span>
+                        <svg class="pizza-collapse-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="pizza-collapse-content" id="pizza-sizes-{{ $itemId }}">
+                        <div class="pizza-sizes" aria-label="Tamanhos e preços da pizza {{ $itemName }}">
+                            @foreach ($pizzaSizes as $sizeName => $sizePrice)
+                            <label class="pizza-size-option">
+                                <input type="checkbox" class="pizza-size-checkbox" data-size="{{ $sizeName }}"
+                                    data-price="{{ number_format((float) $sizePrice, 2, '.', '') }}"
+                                    data-name="{{ $itemName }}">
+                                <span class="pizza-size-name">{{ $sizeName }}</span>
+                                <span class="pizza-size-price">R$ {{ number_format((float) $sizePrice, 2, ',', '.')
+                                    }}</span>
+                            </label>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
                 <div class="pizza-size-message" aria-live="polite"></div>
                 @elseif (!empty($juiceOptions))
-                <div class="pizza-sizes" aria-label="Opções e preços do suco {{ $itemName }}">
-                    @foreach ($juiceOptions as $optionName => $optionPrice)
-                    <label class="pizza-size-option">
-                        <input type="checkbox" class="pizza-size-checkbox" data-size="{{ $optionName }}"
-                            data-price="{{ number_format((float) $optionPrice, 2, '.', '') }}"
-                            data-name="{{ $itemName }}">
-                        <span class="pizza-size-name">{{ $optionName }}</span>
-                        <span class="pizza-size-price">R$ {{ number_format((float) $optionPrice, 2, ',', '.')
-                            }}</span>
-                    </label>
-                    @endforeach
+                <div class="pizza-collapse-wrapper">
+                    <button type="button" class="pizza-collapse-toggle juice-collapse-toggle" aria-expanded="false"
+                        aria-controls="juice-sizes-{{ $itemId }}">
+                        <span class="pizza-collapse-toggle-text juice-toggle-text">Ver opções e preços</span>
+                        <svg class="pizza-collapse-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </button>
+                    <div class="pizza-collapse-content" id="juice-sizes-{{ $itemId }}">
+                        <div class="pizza-sizes" aria-label="Opções e preços do suco {{ $itemName }}">
+                            @foreach ($juiceOptions as $optionName => $optionPrice)
+                            <label class="pizza-size-option">
+                                <input type="checkbox" class="pizza-size-checkbox" data-size="{{ $optionName }}"
+                                    data-price="{{ number_format((float) $optionPrice, 2, '.', '') }}"
+                                    data-name="{{ $itemName }}">
+                                <span class="pizza-size-name">{{ $optionName }}</span>
+                                <span class="pizza-size-price">R$ {{ number_format((float) $optionPrice, 2, ',', '.')
+                                    }}</span>
+                            </label>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
                 <div class="pizza-size-message" aria-live="polite"></div>
                 @endif
@@ -291,34 +315,34 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
 @push('scripts')
 <script>
     window.extraBatataConfig = @json([
-            'name' => $extraBatataItem?->name ?? 'ADICIONAL DE BATATAS',
-            'price' => (float) ($extraBatataItem?->price ?? 7.00),
-        ]);
+        'name' => $extraBatataItem?->name ?? 'ADICIONAL DE BATATAS',
+        'price' => (float)($extraBatataItem?->price ?? 7.00),
+    ]);
 </script>
 @vite(['resources/js/script.js', 'resources/js/comanda.js'])
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-            const button = document.getElementById('back-to-top');
+        const button = document.getElementById('back-to-top');
 
-            if (!button) {
-                return;
-            }
+        if (!button) {
+            return;
+        }
 
-            const toggleVisibility = () => {
-                button.classList.toggle('visible', window.scrollY > 400);
-            };
+        const toggleVisibility = () => {
+            button.classList.toggle('visible', window.scrollY > 400);
+        };
 
-            button.addEventListener('click', () => {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
+        button.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
             });
-
-            window.addEventListener('scroll', toggleVisibility, {
-                passive: true
-            });
-            toggleVisibility();
         });
+
+        window.addEventListener('scroll', toggleVisibility, {
+            passive: true
+        });
+        toggleVisibility();
+    });
 </script>
 @endpush

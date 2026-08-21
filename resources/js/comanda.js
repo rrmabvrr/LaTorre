@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function normalizeComandaItems(items) {
         return items.map(item => {
             const isPizza = Boolean(item.isPizza) || / - (MÉDIA|GRANDE|FAMÍLIA|BIG)$/.test(String(item.name || ''));
-            const isExtra = Boolean(item.isExtra) || String(item.name || '') === (window.extraBatataConfig?.name || 'Adicional de batatas');
+            const isExtra = Boolean(item.isExtra) || String(item.name || '') === (window.extraBatataConfig?.name || 'ADICIONAL DE BATATAS');
 
             return {
                 ...item,
@@ -46,11 +46,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const extraLabel = document.getElementById('comanda-extra-label');
     const extraPrice = document.getElementById('comanda-extra-price');
     const extraWrap = document.getElementById('comanda-extra');
-    const extraConfig = window.extraBatataConfig || { name: 'Adicional de batatas', price: 7.00 };
+    const extraConfig = window.extraBatataConfig || { name: 'ADICIONAL DE BATATAS', price: 7.00 };
 
     function getExtraBatataItem() {
         return {
-            name: extraConfig.name || 'Adicional de batatas',
+            name: extraConfig.name || 'ADICIONAL DE BATATAS',
             price: Number(extraConfig.price || 7.00),
             qty: 1,
             isPizza: false,
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 if (!checkedSize) {
                     if (messageBox) {
-                        messageBox.textContent = 'Selecione um tamanho antes de adicionar.';
+                        messageBox.textContent = 'SELECIONE UM TAMANHO ANTES DE ADICIONAR.';
                         messageBox.classList.add('visible');
                     }
                     return;

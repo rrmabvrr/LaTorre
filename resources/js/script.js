@@ -268,4 +268,31 @@ document.addEventListener('DOMContentLoaded', () => {
         createParticle();
     }
 
+    // ============================================
+    // Pizza Sizes Collapse Toggle
+    // ============================================
+    document.querySelectorAll('.pizza-collapse-toggle').forEach(toggle => {
+        const isJuice = toggle.classList.contains('juice-collapse-toggle');
+        const openLabel = isJuice ? 'Ver opções e preços' : 'Ver tamanhos e preços';
+        const closeLabel = isJuice ? 'Ocultar opções' : 'Ocultar tamanhos';
+
+        toggle.addEventListener('click', () => {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            const contentId = toggle.getAttribute('aria-controls');
+            const content = document.getElementById(contentId);
+
+            if (!content) return;
+
+            if (isExpanded) {
+                toggle.setAttribute('aria-expanded', 'false');
+                content.classList.remove('open');
+                toggle.querySelector('.pizza-collapse-toggle-text').textContent = openLabel;
+            } else {
+                toggle.setAttribute('aria-expanded', 'true');
+                content.classList.add('open');
+                toggle.querySelector('.pizza-collapse-toggle-text').textContent = closeLabel;
+            }
+        });
+    });
+
 });
