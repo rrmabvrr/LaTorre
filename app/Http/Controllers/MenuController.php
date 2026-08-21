@@ -173,11 +173,17 @@ class MenuController extends Controller
             ->orderBy('display_order')
             ->first();
 
+        $extraBatataConfig = [
+            'name' => $extraBatataItem?->name ?? 'ADICIONAL DE BATATAS',
+            'price' => (float) ($extraBatataItem?->price ?? 7.00),
+        ];
+
         return view('cardapio', [
             'categories' => $categories,
             'groupedItems' => $groupedItems,
             'categoryPizzaSizes' => $categoryPizzaSizes,
             'extraBatataItem' => $extraBatataItem,
+            'extraBatataConfig' => $extraBatataConfig,
         ]);
     }
 }

@@ -314,10 +314,7 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
 
 @push('scripts')
 <script>
-    window.extraBatataConfig = @json([
-        'name' => $extraBatataItem?->name ?? 'ADICIONAL DE BATATAS',
-        'price' => (float)($extraBatataItem?->price ?? 7.00),
-    ]);
+    window.extraBatataConfig = @json($extraBatataConfig);
 </script>
 @production
     @if(file_exists(public_path('build/manifest.json')))
