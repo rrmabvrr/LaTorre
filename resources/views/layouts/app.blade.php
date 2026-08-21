@@ -10,7 +10,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    @vite(['resources/css/style.css'])
+    @production
+        @if(file_exists(public_path('build/manifest.json')))
+            @vite(['resources/css/style.css'])
+        @else
+            <link rel="stylesheet" href="{{ asset('style.css') }}">
+        @endif
+    @else
+        @vite(['resources/css/style.css'])
+    @endproduction
     @stack('head')
 </head>
 

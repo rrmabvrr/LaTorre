@@ -319,7 +319,16 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
         'price' => (float)($extraBatataItem?->price ?? 7.00),
     ]);
 </script>
-@vite(['resources/js/script.js', 'resources/js/comanda.js'])
+@production
+    @if(file_exists(public_path('build/manifest.json')))
+        @vite(['resources/js/script.js', 'resources/js/comanda.js'])
+    @else
+        <script src="{{ asset('script.js') }}" defer></script>
+        <script src="{{ asset('comanda.js') }}" defer></script>
+    @endif
+@else
+    @vite(['resources/js/script.js', 'resources/js/comanda.js'])
+@endproduction
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const button = document.getElementById('back-to-top');
