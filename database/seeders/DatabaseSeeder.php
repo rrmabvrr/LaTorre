@@ -517,6 +517,22 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        $pizzaCategoryDefaults = [
+            'tradicionais' => ['MÉDIA' => 39.90, 'GRANDE' => 49.90, 'FAMÍLIA' => 69.90, 'BIG' => 89.90],
+            'especiais' => ['MÉDIA' => 44.90, 'GRANDE' => 54.90, 'FAMÍLIA' => 74.90, 'BIG' => 94.90],
+            'nobres' => ['MÉDIA' => 49.90, 'GRANDE' => 59.90, 'FAMÍLIA' => 79.90, 'BIG' => 99.90],
+        ];
+
+        foreach ($pizzaCategoryDefaults as $category => $sizes) {
+            $items = MenuItem::query()->where('category', $category)->get();
+
+            foreach ($items as $item) {
+                $item->sizes = $sizes;
+                $item->price = (float) ($sizes['MÉDIA'] ?? 0.00);
+                $item->save();
+            }
+        }
+
         $validTiraGosto = [
             'Porção de Batata Frita',
             'Porção de Calabresa',

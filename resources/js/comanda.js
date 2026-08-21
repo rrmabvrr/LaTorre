@@ -47,6 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const extraToggle = document.getElementById('comanda-extra-batata');
     const extraLabel = document.getElementById('comanda-extra-label');
     const extraPrice = document.getElementById('comanda-extra-price');
+    const extraLeiteToggle = document.getElementById('comanda-extra-leite');
+    const extraLeiteLabel = document.getElementById('comanda-extra-leite-label');
+    const extraLeitePrice = document.getElementById('comanda-extra-leite-price');
     const extraWrap = document.getElementById('comanda-extra');
     const extraConfig = window.extraBatataConfig || { name: 'ADICIONAL DE BATATAS', price: 7.00 };
 
@@ -54,6 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return {
             name: String(extraConfig.name || 'ADICIONAL DE BATATAS').toUpperCase(),
             price: Number(extraConfig.price || 7.00),
+            qty: 1,
+            isPizza: false,
+            isExtra: true,
+        };
+    }
+
+    function getExtraLeiteItem() {
+        return {
+            name: 'ADICIONAL DE LEITE',
+            price: 5.00,
             qty: 1,
             isPizza: false,
             isExtra: true,
@@ -86,6 +99,34 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         extraToggle.checked = comandaItems.some(item => item.isExtra === true && item.name === extraItem.name);
+    }
+
+    function syncExtraLeiteState() {
+        if (!extraLeiteToggle) {
+            return;
+        }
+
+        const extraItem = getExtraLeiteItem();
+        const hasJuice = comandaItems.some(item => / - (COPO|JARRA)$/.test(String(item.name || '')));
+        const extraIndex = comandaItems.findIndex(item => item.isExtra === true && item.name === extraItem.name);
+
+        if (!hasJuice) {
+            if (extraIndex >= 0) {
+                comandaItems.splice(extraIndex, 1);
+            }
+            extraLeiteToggle.checked = false;
+            return;
+        }
+
+        if (extraLeiteToggle.checked && extraIndex === -1) {
+            comandaItems.push({ ...extraItem, isExtra: true, isPizza: false, qty: 1 });
+        }
+
+        if (!extraLeiteToggle.checked && extraIndex >= 0) {
+            comandaItems.splice(extraIndex, 1);
+        }
+
+        extraLeiteToggle.checked = comandaItems.some(item => item.isExtra === true && item.name === extraItem.name);
     }
 
     // ============================================
@@ -261,6 +302,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    if (extraLeiteToggle) {
+        extraLeiteToggle.addEventListener('change', () => {
+            syncExtraLeiteState();
+            saveAndRender();
+        });
+    }
+
     function renderComanda() {
         comandaItems = normalizeComandaItems(comandaItems);
 
@@ -276,10 +324,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             syncExtraBatataState();
+        }
 
-            if (extraWrap) {
-                extraWrap.style.display = comandaItems.some(item => item.isPizza || / - (MÉDIA|GRANDE|FAMÍLIA|BIG)$/.test(String(item.name || ''))) ? 'block' : 'none';
+        if (extraLeiteToggle) {
+            if (extraLeiteLabel) {
+                extraLeiteLabel.textContent = 'Adicional de leite';
             }
+
+            if (extraLeitePrice) {
+                extraLeitePrice.textContent = 'R$ 5,00';
+            }
+
+            syncExtraLeiteState();
+        }
+
+        if (extraWrap) {
+            const hasExtras = comandaItems.some(item => item.isPizza || / - (MÉDIA|GRANDE|FAMÍLIA|BIG)$/.test(String(item.name || '')) || / - (COPO|JARRA)$/.test(String(item.name || '')));
+            extraWrap.style.display = hasExtras ? 'block' : 'none';
         }
 
         // Badge

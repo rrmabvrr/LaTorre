@@ -63,6 +63,11 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
                 <span id="comanda-extra-label">{{ ucfirst(mb_strtolower($extraBatataConfig['name'])) }}</span>
                 <strong id="comanda-extra-price">R$ {{ number_format($extraBatataConfig['price'], 2, ',', '.') }}</strong>
             </label>
+            <label class="comanda-extra-toggle comanda-extra-toggle--secondary" for="comanda-extra-leite">
+                <input type="checkbox" id="comanda-extra-leite">
+                <span id="comanda-extra-leite-label">Adicional de leite</span>
+                <strong id="comanda-extra-leite-price">R$ 5,00</strong>
+            </label>
         </div>
         <ul class="comanda-items" id="comanda-items"></ul>
     </div>

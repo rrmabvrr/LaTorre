@@ -1475,6 +1475,8 @@ a {
     background: rgba(32, 143, 92, 0.08);
     border: 1px solid rgba(32, 143, 92, 0.2);
     border-radius: var(--radius-md);
+    display: grid;
+    gap: 10px;
 }
 
 .comanda-extra-toggle {
@@ -1485,6 +1487,11 @@ a {
     font-size: 0.92rem;
     color: var(--brown);
     cursor: pointer;
+}
+
+.comanda-extra-toggle--secondary {
+    padding-top: 10px;
+    border-top: 1px solid rgba(32, 143, 92, 0.18);
 }
 
 .comanda-extra-toggle input {

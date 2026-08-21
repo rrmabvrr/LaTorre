@@ -182,4 +182,30 @@ class PizzaCategoryPriceTest extends TestCase
             ->assertSee('R$ 75,00')
             ->assertSee('R$ 95,00');
     }
+
+    public function test_database_seed_populates_default_category_prices_for_all_pizza_categories(): void
+    {
+        $this->seed();
+
+        $this->assertEquals([
+            'MÉDIA' => 39.90,
+            'GRANDE' => 49.90,
+            'FAMÍLIA' => 69.90,
+            'BIG' => 89.90,
+        ], MenuItem::query()->where('category', 'tradicionais')->first()->sizes);
+
+        $this->assertEquals([
+            'MÉDIA' => 44.90,
+            'GRANDE' => 54.90,
+            'FAMÍLIA' => 74.90,
+            'BIG' => 94.90,
+        ], MenuItem::query()->where('category', 'especiais')->first()->sizes);
+
+        $this->assertEquals([
+            'MÉDIA' => 49.90,
+            'GRANDE' => 59.90,
+            'FAMÍLIA' => 79.90,
+            'BIG' => 99.90,
+        ], MenuItem::query()->where('category', 'nobres')->first()->sizes);
+    }
 }
