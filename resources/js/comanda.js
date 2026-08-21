@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function getExtraBatataItem() {
         return {
-            name: extraConfig.name || 'ADICIONAL DE BATATAS',
+            name: String(extraConfig.name || 'ADICIONAL DE BATATAS').toUpperCase(),
             price: Number(extraConfig.price || 7.00),
             qty: 1,
             isPizza: false,

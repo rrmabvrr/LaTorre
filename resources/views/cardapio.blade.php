@@ -60,8 +60,8 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
         <div class="comanda-extra" id="comanda-extra" style="display: none;">
             <label class="comanda-extra-toggle" for="comanda-extra-batata">
                 <input type="checkbox" id="comanda-extra-batata">
-                <span id="comanda-extra-label">ADICIONAL DE BATATAS</span>
-                <strong id="comanda-extra-price">R$ 10,00</strong>
+                <span id="comanda-extra-label">{{ mb_strtoupper($extraBatataConfig['name']) }}</span>
+                <strong id="comanda-extra-price">R$ {{ number_format($extraBatataConfig['price'], 2, ',', '.') }}</strong>
             </label>
         </div>
         <ul class="comanda-items" id="comanda-items"></ul>
