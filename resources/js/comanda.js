@@ -73,14 +73,24 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     }
 
+    function hasPizzaSelection() {
+        return comandaItems.some(item => item.isPizza || / - (MÉDIA|GRANDE|FAMÍLIA|BIG)$/.test(String(item.name || '')));
+    }
+
+    function hasJuiceSelection() {
+        return comandaItems.some(item => / - (COPO|JARRA)$/.test(String(item.name || '')));
+    }
+
     function syncExtraBatataState() {
         if (!extraToggle) {
             return;
         }
 
         const extraItem = getExtraBatataItem();
-        const hasPizza = comandaItems.some(item => item.isPizza || / - (MÉDIA|GRANDE|FAMÍLIA|BIG)$/.test(String(item.name || '')));
+        const hasPizza = hasPizzaSelection();
         const extraIndex = comandaItems.findIndex(item => item.isExtra === true && item.name === extraItem.name);
+
+        extraToggle.disabled = !hasPizza;
 
         if (!hasPizza) {
             if (extraIndex >= 0) {
@@ -107,8 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const extraItem = getExtraLeiteItem();
-        const hasJuice = comandaItems.some(item => / - (COPO|JARRA)$/.test(String(item.name || '')));
+        const hasJuice = hasJuiceSelection();
         const extraIndex = comandaItems.findIndex(item => item.isExtra === true && item.name === extraItem.name);
+
+        extraLeiteToggle.disabled = !hasJuice;
 
         if (!hasJuice) {
             if (extraIndex >= 0) {
@@ -328,7 +340,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (extraLeiteToggle) {
             if (extraLeiteLabel) {
-                extraLeiteLabel.textContent = 'Adicional de leite';
+                extraLeiteLabel.textContent = 'ADICIONAL DE LEITE';
             }
 
             if (extraLeitePrice) {
@@ -339,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (extraWrap) {
-            const hasExtras = comandaItems.some(item => item.isPizza || / - (MÉDIA|GRANDE|FAMÍLIA|BIG)$/.test(String(item.name || '')) || / - (COPO|JARRA)$/.test(String(item.name || '')));
+            const hasExtras = hasPizzaSelection() || hasJuiceSelection();
             extraWrap.style.display = hasExtras ? 'block' : 'none';
         }
 

@@ -73,6 +73,14 @@ class MenuExtraItemTest extends TestCase
             ->assertSee('ADICIONAL DE LEITE');
     }
 
+    public function test_menu_hides_milk_extra_from_suco_option_list(): void
+    {
+        $this->get(route('cardapio'))
+            ->assertOk()
+            ->assertSee('ADICIONAL DE LEITE')
+            ->assertDontSee('data-size="ADICIONAL DE LEITE"');
+    }
+
     public function test_menu_has_six_tira_gosto_options(): void
     {
         $this->get(route('cardapio'))

@@ -65,7 +65,7 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
             </label>
             <label class="comanda-extra-toggle comanda-extra-toggle--secondary" for="comanda-extra-leite">
                 <input type="checkbox" id="comanda-extra-leite">
-                <span id="comanda-extra-leite-label">Adicional de leite</span>
+                <span id="comanda-extra-leite-label">ADICIONAL DE LEITE</span>
                 <strong id="comanda-extra-leite-price">R$ 5,00</strong>
             </label>
         </div>
@@ -166,11 +166,13 @@ Terça a Domingo a partir das 18h. Peça pelo WhatsApp!')
             }
             }
             $juiceOptions = in_array($categoryKey, ['sucos_naturais'], true)
-            ? ((is_array($itemSizes) && ! empty($itemSizes)) ? $itemSizes : [
+            ? collect((is_array($itemSizes) && ! empty($itemSizes)) ? $itemSizes : [
             'COPO' => 12.00,
             'JARRA' => 24.00,
             'ADICIONAL DE LEITE' => 5.00,
             ])
+            ->reject(fn ($optionPrice, $optionName) => strtoupper(trim((string) $optionName)) === 'ADICIONAL DE LEITE')
+            ->all()
             : null;
             @endphp
             <article class="menu-card {{ $category['cardClass'] }}" id="card-item-{{ $itemId }}">
