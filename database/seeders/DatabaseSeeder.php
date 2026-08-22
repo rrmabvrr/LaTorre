@@ -29,7 +29,7 @@ class DatabaseSeeder extends Seeder
                 'name' => 'MUSSARELA',
                 'description' => 'Molho, mussarela, ovos, tomate, cebola, milho, ervilha, pimentão e orégano.',
                 'category' => 'tradicionais',
-                'price' => 0.00,
+                'price' => null,
                 'is_available' => true,
                 'display_order' => 1,
             ],
@@ -222,62 +222,62 @@ class DatabaseSeeder extends Seeder
                 'display_order' => 7,
             ],
 
-// Sucos_Naturais
+            // Sucos_Naturais
             [
-                'name' => 'MARACUJÁ',
-                'description' => 'Suco natural de laranja',
+                'name' => 'ACEROLA',
+                'description' => 'Suco natural de acerola',
                 'category' => 'sucos_naturais',
-                'price' => 12.00,
-                'sizes' => ['COPO' => 12.00, 'JARRA' => 24.00, 'ADICIONAL DE LEITE' => 5.00],
+                'price' => null,
+                'sizes' => ['COPO' => 8.00, 'JARRA' => 15.00],
                 'is_available' => true,
                 'display_order' => 1,
             ],
             [
                 'name' => 'CUPUAÇÚ',
-                'description' => 'Suco natural de morango',
+                'description' => 'Suco natural de cupuaçu',
                 'category' => 'sucos_naturais',
-                'price' => 12.00,
-                'sizes' => ['COPO' => 12.00, 'JARRA' => 24.00, 'ADICIONAL DE LEITE' => 5.00],
+                'price' => null,
+                'sizes' => ['COPO' => 8.00, 'JARRA' => 15.00],
                 'is_available' => true,
                 'display_order' => 2,
             ],
             [
-                'name' => 'ACEROLA',
-                'description' => 'Suco natural de maracujá',
+                'name' => 'GOIABA',
+                'description' => 'Suco natural de goiaba',
                 'category' => 'sucos_naturais',
-                'price' => 12.00,
-                'sizes' => ['COPO' => 12.00, 'JARRA' => 24.00, 'ADICIONAL DE LEITE' => 5.00],
+                'price' => null,
+                'sizes' => ['COPO' => 8.00, 'JARRA' => 15.00],
                 'is_available' => true,
                 'display_order' => 3,
             ],
             [
                 'name' => 'GRAVIOLA',
-                'description' => 'Suco natural de abacaxi',
+                'description' => 'Suco natural de graviola',
                 'category' => 'sucos_naturais',
-                'price' => 12.00,
-                'sizes' => ['COPO' => 12.00, 'JARRA' => 24.00, 'ADICIONAL DE LEITE' => 5.00],
+                'price' => null,
+                'sizes' => ['COPO' => 8.00, 'JARRA' => 15.00],
                 'is_available' => true,
                 'display_order' => 4,
             ],
             [
-                'name' => 'TAPEREBÁ',
-                'description' => 'Suco natural de acerola',
+                'name' => 'MARACUJÁ',
+                'description' => 'Suco natural de maracujá',
                 'category' => 'sucos_naturais',
-                'price' => 12.00,
-                'sizes' => ['COPO' => 12.00, 'JARRA' => 24.00, 'ADICIONAL DE LEITE' => 5.00],
+                'price' => null,
+                'sizes' => ['COPO' => 8.00, 'JARRA' => 15.00],
                 'is_available' => true,
                 'display_order' => 5,
             ],
             [
-                'name' => 'GOIABA',
-                'description' => 'Suco natural de limão',
+                'name' => 'TAPEREBÁ',
+                'description' => 'Suco natural de taperebá',
                 'category' => 'sucos_naturais',
-                'price' => 12.00,
-                'sizes' => ['COPO' => 12.00, 'JARRA' => 24.00, 'ADICIONAL DE LEITE' => 5.00],
+                'price' => null,
+                'sizes' => ['COPO' => 8.00, 'JARRA' => 15.00],
                 'is_available' => true,
                 'display_order' => 6,
             ],
-// Tira_Gosto
+            // Tira_Gosto
             [
                 'name' => 'Porção de Batata Frita',
                 'description' => 'Porção crocante de batata frita',
@@ -294,38 +294,17 @@ class DatabaseSeeder extends Seeder
                 'is_available' => true,
                 'display_order' => 2,
             ],
+
             [
-                'name' => 'Porção de Cebola',
-                'description' => 'Porção crocante de cebola frita',
-                'category' => 'tira_gosto',
-                'price' => 18.90,
-                'is_available' => true,
-                'display_order' => 3,
-            ],
-            [
-                'name' => 'Porção de Frango',
-                'description' => 'Porção de frango frito',
-                'category' => 'tira_gosto',
-                'price' => 24.90,
-                'is_available' => true,
-                'display_order' => 4,
-            ],
-            [
-                'name' => 'Anéis de Cebola',
-                'description' => 'Anéis crocantes de cebola frita',
-                'category' => 'tira_gosto',
-                'price' => 19.90,
-                'is_available' => true,
-                'display_order' => 5,
-            ],
-            [
-                'name' => 'Porção Mista',
-                'description' => 'Porção mista de batata, calabresa e carne de sol',
+                'name' => 'Batata + Calabresa',
+                'description' => 'Mix de batata e calabresa',
                 'category' => 'tira_gosto',
                 'price' => 29.90,
                 'is_available' => true,
-                'display_order' => 6,
+                'display_order' => 3,
             ],
+
+            // BEBIDAS
             [
                 'name' => 'Refrigerante 350ml',
                 'description' => 'Lata',
@@ -414,6 +393,8 @@ class DatabaseSeeder extends Seeder
                 'is_available' => true,
                 'display_order' => 11,
             ],
+
+            // Cervejas
             [
                 'name' => 'LATA',
                 'description' => '269 ml',
@@ -470,14 +451,18 @@ class DatabaseSeeder extends Seeder
                 'is_available' => true,
                 'display_order' => 7,
             ],
+
+            // Sorvetes
             [
-                'name' => 'Casquinha',
-                'description' => 'Sabor de escolha',
+                'name' => 'BOLA DE SORVETE',
+                'description' => 'Sabores a escolher',
                 'category' => 'sorvetes',
-                'price' => 8.00,
+                'price' => 4.50,
                 'is_available' => true,
                 'display_order' => 1,
             ],
+
+            // Adicionais
             [
                 'name' => 'ADICIONAL DE BATATAS',
                 'description' => 'Adicional para pizzas',
@@ -485,6 +470,14 @@ class DatabaseSeeder extends Seeder
                 'price' => 10.00,
                 'is_available' => true,
                 'display_order' => 1,
+            ],
+            [
+                'name' => 'ADICIONAL DE LEITE',
+                'description' => 'Adicional para pizzas',
+                'category' => 'adicionais',
+                'price' => 3.50,
+                'is_available' => true,
+                'display_order' => 2,
             ],
         ];
 
@@ -518,9 +511,9 @@ class DatabaseSeeder extends Seeder
         }
 
         $pizzaCategoryDefaults = [
-            'tradicionais' => ['MÉDIA' => 39.90, 'GRANDE' => 49.90, 'FAMÍLIA' => 69.90, 'BIG' => 89.90],
-            'especiais' => ['MÉDIA' => 44.90, 'GRANDE' => 54.90, 'FAMÍLIA' => 74.90, 'BIG' => 94.90],
-            'nobres' => ['MÉDIA' => 49.90, 'GRANDE' => 59.90, 'FAMÍLIA' => 79.90, 'BIG' => 99.90],
+            'tradicionais' => ['MÉDIA' => 40.00, 'GRANDE' => 50.00, 'FAMÍLIA' => 60.00, 'BIG' => 72.00],
+            'especiais' => ['MÉDIA' => 50.00, 'GRANDE' => 60.00, 'FAMÍLIA' => 70.00, 'BIG' => 82.00],
+            'nobres' => ['MÉDIA' => 60.90, 'GRANDE' => 70.00, 'FAMÍLIA' => 82.00, 'BIG' => 100.00],
         ];
 
         foreach ($pizzaCategoryDefaults as $category => $sizes) {

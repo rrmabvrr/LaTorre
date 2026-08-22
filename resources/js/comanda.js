@@ -100,15 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (extraToggle.checked && extraIndex === -1) {
-            comandaItems.push({ ...extraItem, isExtra: true, isPizza: false, qty: 1 });
-        }
-
-        if (!extraToggle.checked && extraIndex >= 0) {
-            comandaItems.splice(extraIndex, 1);
-        }
-
-        extraToggle.checked = comandaItems.some(item => item.isExtra === true && item.name === extraItem.name);
+        extraToggle.checked = extraIndex >= 0;
     }
 
     function syncExtraLeiteState() {
@@ -130,15 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        if (extraLeiteToggle.checked && extraIndex === -1) {
-            comandaItems.push({ ...extraItem, isExtra: true, isPizza: false, qty: 1 });
-        }
-
-        if (!extraLeiteToggle.checked && extraIndex >= 0) {
-            comandaItems.splice(extraIndex, 1);
-        }
-
-        extraLeiteToggle.checked = comandaItems.some(item => item.isExtra === true && item.name === extraItem.name);
+        extraLeiteToggle.checked = extraIndex >= 0;
     }
 
     // ============================================
@@ -309,14 +293,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================
     if (extraToggle) {
         extraToggle.addEventListener('change', () => {
-            syncExtraBatataState();
+            const extraItem = getExtraBatataItem();
+            const extraIndex = comandaItems.findIndex(item => item.isExtra === true && item.name === extraItem.name);
+
+            if (extraToggle.checked && extraIndex === -1) {
+                comandaItems.push({ ...extraItem, isExtra: true, isPizza: false, qty: 1 });
+            } else if (!extraToggle.checked && extraIndex >= 0) {
+                comandaItems.splice(extraIndex, 1);
+            }
             saveAndRender();
         });
     }
 
     if (extraLeiteToggle) {
         extraLeiteToggle.addEventListener('change', () => {
-            syncExtraLeiteState();
+            const extraItem = getExtraLeiteItem();
+            const extraIndex = comandaItems.findIndex(item => item.isExtra === true && item.name === extraItem.name);
+
+            if (extraLeiteToggle.checked && extraIndex === -1) {
+                comandaItems.push({ ...extraItem, isExtra: true, isPizza: false, qty: 1 });
+            } else if (!extraLeiteToggle.checked && extraIndex >= 0) {
+                comandaItems.splice(extraIndex, 1);
+            }
             saveAndRender();
         });
     }

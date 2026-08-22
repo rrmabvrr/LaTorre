@@ -112,7 +112,7 @@
                 <h2>{{ $label }}</h2>
 
                 @if ($items->isEmpty())
-                    <p class="empty">Sem itens disponiveis nesta categoria.</p>
+                    <p class="empty">Sem itens disponíveis nesta categoria.</p>
                 @else
                     @foreach ($items as $item)
                         <article class="item">
